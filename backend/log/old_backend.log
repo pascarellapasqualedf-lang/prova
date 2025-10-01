@@ -1,0 +1,1336 @@
+2025-09-05 08:48:13,455 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per BTC: cryptocom {"id":1757054871303,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 08:48:13,820 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per ETH: cryptocom {"id":1757054871303,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 08:48:14,301 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per TON: cryptocom {"id":1757054871303,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 08:48:14,652 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per DOGE: cryptocom {"id":1757054871303,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 08:48:15,234 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:48:35,124 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per LUNA2: cryptocom POST https://api.crypto.com/exchange/v1/private/get-currency-networks
+2025-09-05 08:48:37,314 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 08:49:31,570 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 08:49:32,171 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757054971601,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757054971601",
+    "order_id" : "4611686156797671528"
+  }
+}
+2025-09-05 08:50:50,407 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:51:12,063 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055071486,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055071486",
+    "order_id" : "4611686156797753728"
+  }
+}
+2025-09-05 08:52:24,468 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:52:33,404 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055152836,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055152836",
+    "order_id" : "4611686156797832548"
+  }
+}
+2025-09-05 08:53:38,874 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:53:48,373 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055227793,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055227793",
+    "order_id" : "4611686156797907142"
+  }
+}
+2025-09-05 08:55:01,365 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:55:20,396 - INFO - AI: Segnale di vendita per BTC, ma nessun asset posseduto.
+2025-09-05 08:55:20,397 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 08:55:30,096 - INFO - AI: Segnale di vendita per ETH, ma nessun asset posseduto.
+2025-09-05 08:55:30,097 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 08:55:44,461 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055343847,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055343847",
+    "order_id" : "4611686156798008506"
+  }
+}
+2025-09-05 08:56:53,780 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:57:10,394 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055429639,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055429639",
+    "order_id" : "4611686156798077978"
+  }
+}
+2025-09-05 08:58:15,671 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:58:24,102 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055503521,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055503521",
+    "order_id" : "4611686156798145396"
+  }
+}
+2025-09-05 08:59:27,319 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 08:59:35,510 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055574951,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055574951",
+    "order_id" : "4611686156798201191"
+  }
+}
+2025-09-05 09:00:44,068 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:00:51,171 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055650609,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055650609",
+    "order_id" : "4611686156798287151"
+  }
+}
+2025-09-05 09:02:16,445 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:02:30,588 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055749964,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055749964",
+    "order_id" : "4611686156798497084"
+  }
+}
+2025-09-05 09:03:38,987 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:03:49,492 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055828925,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055828925",
+    "order_id" : "4611686156798640807"
+  }
+}
+2025-09-05 09:04:54,707 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:05:05,308 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055904742,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055904742",
+    "order_id" : "4611686156798797188"
+  }
+}
+2025-09-05 09:05:24,816 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 09:06:08,951 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:06:15,872 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757055975290,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757055975290",
+    "order_id" : "4611686156798921781"
+  }
+}
+2025-09-05 09:07:25,542 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:07:34,244 - INFO - AI: Segnale MANTIENI per BTC/USDT. Nessuna operazione.
+2025-09-05 09:07:34,249 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 09:13:06,911 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 09:13:06,913 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 09:13:08,798 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 09:13:10,302 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per BTC: cryptocom {"id":1757056388813,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:13:10,303 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per ETH: cryptocom {"id":1757056388813,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:13:10,303 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per TON: cryptocom {"id":1757056388813,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:13:10,305 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per DOGE: cryptocom {"id":1757056388813,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:13:10,565 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:13:15,156 - ERROR - Errore nel ciclo di trading AI: Errore di rete con la piattaforma cryptocom: cryptocom {"id":1757056392400,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:14:18,117 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per BTC: cryptocom {"id":1757056455194,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:14:18,125 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per ETH: cryptocom {"id":1757056455194,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:14:18,126 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per TON: cryptocom {"id":1757056455194,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:14:18,127 - WARNING - ATTENZIONE: Impossibile ottenere il prezzo per DOGE: cryptocom {"id":1757056455194,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:14:18,387 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:14:26,413 - ERROR - Errore nel ciclo di trading AI: Errore di rete con la piattaforma cryptocom: cryptocom {"id":1757056462556,"method":"private/get-currency-networks","code":10007,"message":"INVALID_NONCE"}
+2025-09-05 09:15:03,039 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:15:12,325 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757056511775,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757056511775",
+    "order_id" : "4611686156799741066"
+  }
+}
+2025-09-05 09:16:17,372 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:16:28,922 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757056588358,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757056588358",
+    "order_id" : "4611686156799844729"
+  }
+}
+2025-09-05 09:17:32,283 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:17:34,994 - INFO - AI: Segnale MANTIENI per BTC/USDT. Nessuna operazione.
+2025-09-05 09:17:34,994 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 09:17:40,788 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757056660145,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757056660145",
+    "order_id" : "4611686156799943729"
+  }
+}
+2025-09-05 09:18:44,072 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:18:50,890 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757056730321,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757056730321",
+    "order_id" : "4611686156800048337"
+  }
+}
+2025-09-05 09:19:54,932 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 09:19:54,934 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000002CC598C7D90>
+2025-09-05 09:19:59,174 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 09:19:59,174 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 09:20:06,622 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 09:20:10,262 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:20:12,891 - INFO - AI: Segnale MANTIENI per BTC/USDT. Nessuna operazione.
+2025-09-05 09:20:12,891 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 09:20:19,082 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 09:20:19,084 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 09:20:24,548 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 09:20:28,373 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:20:35,435 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757056834864,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757056834864",
+    "order_id" : "4611686156800186137"
+  }
+}
+2025-09-05 09:21:45,059 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:21:54,177 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757056913545,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757056913545",
+    "order_id" : "4611686156800393261"
+  }
+}
+2025-09-05 09:22:45,624 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:22:47,199 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:22:53,963 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:22:59,260 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:23:07,231 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757056986633,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757056986633",
+    "order_id" : "4611686156800545419"
+  }
+}
+2025-09-05 09:23:22,711 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:23:24,881 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:23:27,980 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:23:33,758 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 09:23:33,758 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 09:23:33,759 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x00000140BB0342D0>
+2025-09-05 09:23:33,760 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x00000140BB69DA90>, 848.2703273)])']
+connector: <aiohttp.connector.TCPConnector object at 0x00000140BB035A90>
+2025-09-05 09:24:11,277 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:24:13,562 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:24:13,642 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:24:18,733 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 09:24:20,541 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057059985,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057059985",
+    "order_id" : "4611686156800662491"
+  }
+}
+2025-09-05 09:24:25,093 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 09:24:25,093 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 09:24:25,094 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x00000140BB034410>
+2025-09-05 09:24:25,094 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x00000140BB69D850>, 899.4038339)])']
+connector: <aiohttp.connector.TCPConnector object at 0x00000140BB035590>
+2025-09-05 09:25:23,755 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:25:31,003 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057130418,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057130418",
+    "order_id" : "4611686156800765275"
+  }
+}
+2025-09-05 09:26:33,789 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:26:41,531 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057200914,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057200914",
+    "order_id" : "4611686156800863701"
+  }
+}
+2025-09-05 09:27:45,284 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:27:53,178 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057272611,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057272611",
+    "order_id" : "4611686156800961146"
+  }
+}
+2025-09-05 09:28:56,277 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:29:01,634 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057341069,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057341069",
+    "order_id" : "4611686156801067187"
+  }
+}
+2025-09-05 09:30:04,631 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:30:10,121 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057409548,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057409548",
+    "order_id" : "4611686156801169962"
+  }
+}
+2025-09-05 09:31:13,155 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:31:22,665 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057481634,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057481634",
+    "order_id" : "4611686156801290192"
+  }
+}
+2025-09-05 09:32:26,465 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:32:31,421 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057550790,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057550790",
+    "order_id" : "4611686156801397598"
+  }
+}
+2025-09-05 09:33:34,221 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:33:39,264 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057618703,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057618703",
+    "order_id" : "4611686156801511469"
+  }
+}
+2025-09-05 09:34:41,896 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:34:49,894 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057689311,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057689311",
+    "order_id" : "4611686156801617584"
+  }
+}
+2025-09-05 09:35:53,093 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:36:01,240 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057760661,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057760661",
+    "order_id" : "4611686156801751473"
+  }
+}
+2025-09-05 09:37:04,571 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:37:12,228 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057831672,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057831672",
+    "order_id" : "4611686156801881588"
+  }
+}
+2025-09-05 09:38:15,211 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:38:18,408 - INFO - AI: Segnale MANTIENI per BTC/USDT. Nessuna operazione.
+2025-09-05 09:38:18,409 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 09:38:24,891 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057904327,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057904327",
+    "order_id" : "4611686156801997125"
+  }
+}
+2025-09-05 09:39:17,488 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 09:39:27,848 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:39:31,126 - INFO - AI: Segnale di vendita per BTC, ma nessun asset posseduto.
+2025-09-05 09:39:31,127 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 09:39:38,386 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757057977821,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757057977821",
+    "order_id" : "4611686156802109542"
+  }
+}
+2025-09-05 09:40:41,721 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:40:49,120 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058048497,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058048497",
+    "order_id" : "4611686156802213303"
+  }
+}
+2025-09-05 09:41:47,512 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 09:41:52,583 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:42:01,210 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058120606,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058120606",
+    "order_id" : "4611686156802303187"
+  }
+}
+2025-09-05 09:43:05,129 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:43:13,256 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058192707,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058192707",
+    "order_id" : "4611686156802409575"
+  }
+}
+2025-09-05 09:44:18,271 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:44:25,084 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058264518,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058264518",
+    "order_id" : "4611686156802503869"
+  }
+}
+2025-09-05 09:45:29,494 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:45:36,168 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058335591,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058335591",
+    "order_id" : "4611686156802601146"
+  }
+}
+2025-09-05 09:46:39,275 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:46:46,826 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058406263,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058406263",
+    "order_id" : "4611686156802751686"
+  }
+}
+2025-09-05 09:47:51,888 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:47:54,341 - INFO - AI: Segnale MANTIENI per BTC/USDT. Nessuna operazione.
+2025-09-05 09:47:54,341 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 09:47:56,709 - INFO - AI: Segnale MANTIENI per ETH/USDT. Nessuna operazione.
+2025-09-05 09:47:56,709 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 09:48:04,896 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058484271,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058484271",
+    "order_id" : "4611686156802914310"
+  }
+}
+2025-09-05 09:48:17,603 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 09:49:07,554 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:49:12,679 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058552053,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058552053",
+    "order_id" : "4611686156803010617"
+  }
+}
+2025-09-05 09:50:17,338 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:50:23,097 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058622513,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058622513",
+    "order_id" : "4611686156803114014"
+  }
+}
+2025-09-05 09:51:27,856 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:51:33,321 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058692759,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058692759",
+    "order_id" : "4611686156803248781"
+  }
+}
+2025-09-05 09:52:36,198 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:52:41,111 - INFO - AI: Segnale di vendita per BTC, ma nessun asset posseduto.
+2025-09-05 09:52:41,111 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 09:52:45,957 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058765392,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058765392",
+    "order_id" : "4611686156803387772"
+  }
+}
+2025-09-05 09:52:47,662 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 09:53:50,741 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:53:55,878 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058835287,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058835287",
+    "order_id" : "4611686156803493131"
+  }
+}
+2025-09-05 09:54:59,790 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:55:05,363 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058904741,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058904741",
+    "order_id" : "4611686156803635709"
+  }
+}
+2025-09-05 09:56:10,494 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:56:16,390 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757058975814,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757058975814",
+    "order_id" : "4611686156803782144"
+  }
+}
+2025-09-05 09:57:19,287 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:57:26,103 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059045510,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059045510",
+    "order_id" : "4611686156803896392"
+  }
+}
+2025-09-05 09:58:28,832 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:58:33,958 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059113393,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059113393",
+    "order_id" : "4611686156803997652"
+  }
+}
+2025-09-05 09:59:36,798 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 09:59:41,895 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059181232,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059181232",
+    "order_id" : "4611686156804083147"
+  }
+}
+2025-09-05 10:00:44,565 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:00:47,243 - INFO - AI: Segnale di vendita per BTC, ma nessun asset posseduto.
+2025-09-05 10:00:47,244 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:00:53,399 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059252468,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059252468",
+    "order_id" : "4611686156804222232"
+  }
+}
+2025-09-05 10:01:56,924 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:02:01,964 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059321413,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059321413",
+    "order_id" : "4611686156804366558"
+  }
+}
+2025-09-05 10:03:05,074 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:03:11,084 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059389734,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059389734",
+    "order_id" : "4611686156804512187"
+  }
+}
+2025-09-05 10:03:49,843 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 10:04:14,321 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:04:21,256 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059460688,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059460688",
+    "order_id" : "4611686156804621491"
+  }
+}
+2025-09-05 10:05:24,874 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:05:27,505 - INFO - AI: Segnale di vendita per BTC, ma nessun asset posseduto.
+2025-09-05 10:05:27,505 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:05:34,703 - INFO - AI: Segnale MANTIENI per ETH/USDT. Nessuna operazione.
+2025-09-05 10:05:34,704 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:05:40,551 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059539415,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059539415",
+    "order_id" : "4611686156804757631"
+  }
+}
+2025-09-05 10:06:14,282 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:06:14,296 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:06:14,585 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:06:44,174 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 10:06:44,175 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 10:06:50,183 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 10:06:57,089 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:07:02,219 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059621678,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059621678",
+    "order_id" : "4611686156804895974"
+  }
+}
+2025-09-05 10:07:10,176 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:07:10,187 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:07:10,318 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:08:05,051 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:08:09,964 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059689397,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059689397",
+    "order_id" : "4611686156805015469"
+  }
+}
+2025-09-05 10:09:05,347 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:09:05,362 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:09:05,517 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:09:11,851 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 10:09:11,852 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:09:11,852 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000018C38DC4050>
+2025-09-05 10:09:11,853 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000018C38A0AF90>, 3586.2978)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000018C38DC4910>
+2025-09-05 10:09:13,918 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:09:20,542 - ERROR - Errore nel recupero dati OHLCV per etBTC/USDT su cryptocom: cryptocom does not have market symbol ETBTC/USDT
+2025-09-05 10:09:20,542 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:09:20,543 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000018C38A8D6D0>
+2025-09-05 10:09:20,543 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000018C38BE5490>, 3594.6862743)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000018C38A8D590>
+2025-09-05 10:09:21,409 - ERROR - Errore nel recupero dati OHLCV per ethTC/USDT su cryptocom: cryptocom does not have market symbol ETHTC/USDT
+2025-09-05 10:09:21,410 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:09:21,410 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000018C38A8EAD0>
+2025-09-05 10:09:21,411 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000018C38BE6F90>, 3595.2554911)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000018C38A8E990>
+2025-09-05 10:09:21,419 - ERROR - Errore nel recupero dati OHLCV per ethC/USDT su cryptocom: cryptocom does not have market symbol ETHC/USDT
+2025-09-05 10:09:21,420 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:09:21,420 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000018C38A8E710>
+2025-09-05 10:09:21,421 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000018C38BE6870>, 3595.2622422)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000018C38A8E5D0>
+2025-09-05 10:09:21,965 - ERROR - Errore nel recupero dati OHLCV per ethBTC/USDT su cryptocom: cryptocom does not have market symbol ETHBTC/USDT
+2025-09-05 10:09:21,965 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:09:21,966 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000018C38A8D310>
+2025-09-05 10:09:21,967 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000018C38BE6C90>, 3596.3988712)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000018C38A8D1D0>
+2025-09-05 10:09:22,327 - ERROR - Errore nel recupero dati OHLCV per eBTC/USDT su cryptocom: cryptocom does not have market symbol EBTC/USDT
+2025-09-05 10:09:22,328 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:09:22,328 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000018C38A8C2D0>
+2025-09-05 10:09:22,330 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000018C38BE7350>, 3596.6904689)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000018C38A8C190>
+2025-09-05 10:09:27,314 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059766733,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059766733",
+    "order_id" : "4611686156805148862"
+  }
+}
+2025-09-05 10:10:31,108 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:10:41,105 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059840465,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059840465",
+    "order_id" : "4611686156805295220"
+  }
+}
+2025-09-05 10:11:44,016 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:11:50,946 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059910352,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059910352",
+    "order_id" : "4611686156805404801"
+  }
+}
+2025-09-05 10:12:55,127 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:13:02,424 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757059981827,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757059981827",
+    "order_id" : "4611686156805517264"
+  }
+}
+2025-09-05 10:13:53,395 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 10:14:06,848 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:14:12,016 - ERROR - Errore nel ciclo di trading AI: Fondi insufficienti sulla piattaforma cryptocom: cryptocom {
+  "id" : 1757060051406,
+  "method" : "private/create-order",
+  "code" : 306,
+  "message" : "INSUFFICIENT_AVAILABLE_BALANCE",
+  "result" : {
+    "client_oid" : "1757060051406",
+    "order_id" : "4611686156805626696"
+  }
+}
+2025-09-05 10:15:16,963 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:15:23,419 - ERROR - Errore nel ciclo di trading AI: Errore dell'exchange cryptocom: cryptocom {"code":40101,"message":"Authentication failure"}
+2025-09-05 10:16:25,878 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 10:16:28,939 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:16:33,372 - ERROR - Errore nel ciclo di trading AI: Errore dell'exchange cryptocom: cryptocom {"code":40101,"message":"Authentication failure"}
+2025-09-05 10:17:36,869 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:17:42,009 - ERROR - Errore nel ciclo di trading AI: Errore dell'exchange cryptocom: cryptocom {"code":40101,"message":"Authentication failure"}
+2025-09-05 10:18:45,711 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:18:50,958 - ERROR - Errore nel ciclo di trading AI: Errore dell'exchange cryptocom: cryptocom {"code":40101,"message":"Authentication failure"}
+2025-09-05 10:19:53,812 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:20:02,294 - ERROR - Errore nel ciclo di trading AI: Errore dell'exchange cryptocom: cryptocom {"code":40101,"message":"Authentication failure"}
+2025-09-05 10:25:28,958 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 10:25:28,958 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 10:25:31,150 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 10:25:34,185 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:25:36,388 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:25:36,389 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:25:38,610 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:25:38,611 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:25:41,843 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:25:41,844 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:25:46,926 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:25:50,795 - ERROR - Errore durante l'ottimizzazione del portafoglio: name 'gestore_globale_portafoglio' is not defined
+2025-09-05 10:25:50,811 - ERROR - Errore durante l'ottimizzazione del portafoglio: name 'gestore_globale_portafoglio' is not defined
+2025-09-05 10:27:59,428 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 10:27:59,429 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 10:28:01,970 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 10:28:02,937 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:28:02,938 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x00000176D5634690>
+2025-09-05 10:28:07,359 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 10:28:07,360 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 10:28:09,956 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 10:28:13,577 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:28:15,950 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:28:15,951 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:28:18,119 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:28:18,120 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:28:20,417 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:28:20,418 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:28:22,728 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:31:15,923 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 10:31:15,924 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 10:31:18,321 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 10:31:20,713 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:31:23,012 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:31:23,012 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:31:26,407 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:31:26,408 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:31:29,666 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:31:29,667 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:31:31,946 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:32:12,916 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:32:12,930 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:32:13,237 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:32:22,048 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 10:32:22,050 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:32:22,051 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000017232488CD0>
+2025-09-05 10:32:22,052 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000017231E937D0>, 4975.9137184)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000017232488B90>
+2025-09-05 10:36:35,055 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:36:38,734 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:36:38,735 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:36:42,464 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:36:42,464 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:36:50,317 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:36:50,336 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:36:54,018 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:41:56,683 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:41:59,281 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:41:59,282 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:42:01,869 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:42:01,870 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:42:05,965 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:42:05,967 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:42:09,623 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:42:37,934 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:42:37,975 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:42:38,216 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:42:44,955 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 10:42:44,955 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:42:44,956 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x00000172338C8410>
+2025-09-05 10:42:44,957 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000017232486CF0>, 5599.4083036)])']
+connector: <aiohttp.connector.TCPConnector object at 0x00000172338C82D0>
+2025-09-05 10:43:23,025 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:43:23,046 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:43:23,129 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:44:07,433 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:44:07,456 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:44:07,606 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:44:14,837 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 10:44:14,837 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:44:14,838 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000017232194410>
+2025-09-05 10:44:14,841 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000017232487290>, 5689.0163692)])']
+connector: <aiohttp.connector.TCPConnector object at 0x00000172321942D0>
+2025-09-05 10:44:54,429 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:44:54,444 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:44:54,554 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:46:43,161 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:46:43,181 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:46:43,287 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:46:53,815 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:46:54,775 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:46:55,752 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:47:04,138 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 10:47:04,139 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:47:04,139 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000017231F04B90>
+2025-09-05 10:47:04,140 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000017231E930B0>, 5858.5652102)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000017231F04A50>
+2025-09-05 10:47:14,502 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:47:19,338 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:47:19,339 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:47:22,520 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:47:22,521 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:47:27,167 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:47:27,168 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:47:29,825 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:48:06,470 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 10:48:06,470 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 10:48:13,850 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 10:48:18,650 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:48:22,857 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:48:22,857 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:48:25,819 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:48:25,820 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:48:28,392 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:48:28,393 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:48:30,777 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:48:59,811 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:48:59,821 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:49:00,328 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 10:49:08,074 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 10:49:08,075 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 10:49:08,075 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001FFB59A4A50>
+2025-09-05 10:49:08,076 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001FFB56E3CB0>, 5982.2947368)])']
+connector: <aiohttp.connector.TCPConnector object at 0x000001FFB59A4410>
+2025-09-05 10:53:33,501 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:53:38,164 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:53:38,165 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:53:41,333 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:53:41,334 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:53:43,540 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:53:43,541 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:53:45,966 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 10:58:53,857 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 10:58:58,229 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 10:58:58,229 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 10:59:00,963 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 10:59:00,964 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 10:59:03,300 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 10:59:03,300 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 10:59:07,791 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:04:13,686 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:04:16,227 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:04:16,227 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:04:19,723 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:04:19,723 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:04:22,686 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:04:22,686 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:04:27,586 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:06:33,490 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 11:06:33,659 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 11:06:36,219 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 11:07:01,959 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 11:07:01,976 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 11:07:01,977 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001FFB5855590>
+2025-09-05 11:07:01,978 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001FFB56E3890>, 7056.3723572)])']
+connector: <aiohttp.connector.TCPConnector object at 0x000001FFB5854F50>
+2025-09-05 11:08:52,533 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 11:08:52,543 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 11:08:59,663 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 11:09:03,560 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:09:09,394 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:09:09,395 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:09:15,762 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:09:15,763 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:09:21,508 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:09:21,508 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:09:26,271 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:11:02,693 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 11:11:02,702 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 11:11:02,832 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su binance: Piattaforma 'binance' non è attiva nella configurazione.
+2025-09-05 11:11:09,200 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 11:11:09,201 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 11:11:09,202 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001C9BB800CD0>
+2025-09-05 11:11:09,202 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C9BAFA3770>, 7303.5186755)])']
+connector: <aiohttp.connector.TCPConnector object at 0x000001C9BB800A50>
+2025-09-05 11:14:39,311 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:14:48,531 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:14:48,532 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:14:56,378 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:14:56,379 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:15:07,438 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:15:07,440 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:15:15,061 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:15:15,482 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:15:19,038 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:15:19,039 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:15:23,956 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:15:23,958 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:15:36,554 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:15:36,555 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:15:39,228 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:16:30,270 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:20:45,483 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:20:50,016 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:20:50,016 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:20:57,271 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 11:20:57,272 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 11:21:11,484 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 11:21:11,786 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:21:20,175 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:21:20,175 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:21:29,326 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:21:29,327 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:21:37,672 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:21:37,673 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:21:51,324 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:21:52,424 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:22:04,238 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:22:04,239 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:22:08,640 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:22:08,811 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:22:21,146 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:22:21,147 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:22:23,525 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:22:23,526 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:22:23,526 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:22:33,559 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:22:33,559 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:22:41,993 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:23:16,766 - WARNING - Prezzo USDT per BTC non disponibile per calcolo controvalore.
+2025-09-05 11:23:16,770 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:23:16,785 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:23:16,786 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:23:16,788 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:23:17,115 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:23:17,116 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:23:18,910 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:23:18,911 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:23:18,912 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:27:44,019 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:28:01,013 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:28:01,021 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:28:12,148 - WARNING - Prezzo USDT per BTC non disponibile per calcolo controvalore.
+2025-09-05 11:28:12,149 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:28:12,149 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:28:12,150 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:28:12,153 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:28:13,962 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:28:14,107 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:28:14,109 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:28:22,029 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:28:22,029 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:28:27,884 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:28:27,885 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:28:34,424 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:28:34,702 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:28:37,262 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:28:37,262 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:28:41,795 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:28:41,796 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:28:48,691 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:28:48,696 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:28:52,318 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:29:25,998 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:29:25,998 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:29:25,999 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:29:57,229 - ERROR - Errore nel recupero dati OHLCV per BTC/USDC su cryptocom: cryptocom does not have market symbol BTC/USDC
+2025-09-05 11:29:57,230 - WARNING - cryptocom requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 11:29:57,230 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000014D686C07D0>
+2025-09-05 11:29:57,231 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000014D47378EF0>, 8431.4919238)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000014D686C0690>
+2025-09-05 11:30:29,721 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:31:39,606 - WARNING - Prezzo USDT per BTC non disponibile per calcolo controvalore.
+2025-09-05 11:31:39,612 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:31:39,612 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:31:39,612 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:31:39,612 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:32:57,091 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 11:32:57,091 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 11:33:10,368 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 11:33:10,766 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:33:25,545 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:33:25,546 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:33:36,301 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:33:36,302 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:33:47,989 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:33:47,990 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:34:04,590 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:34:06,514 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:34:17,419 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:34:17,428 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:34:17,429 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:34:19,752 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:34:19,759 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:34:29,173 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:34:29,176 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:34:35,263 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:34:35,263 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:34:39,878 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:35:00,565 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 11:35:00,565 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 11:35:13,131 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 11:35:13,508 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:35:27,182 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:35:27,183 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:35:38,167 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:35:38,167 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:36:02,418 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:36:02,418 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:36:07,329 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1757064952464&recvWindow=60000&signature=cb39d0bec2c04fa5cef74b4484be05bcb16adf81666bc505bf72cea8a71eee37
+2025-09-05 11:36:08,982 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:36:08,983 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:36:08,983 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:36:08,983 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:36:10,380 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 11:36:10,381 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023A56EE9B50>, 8797.3530844)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000023A56C0ED50>
+2025-09-05 11:36:24,570 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2025-09-05 11:36:24,812 - ERROR - Errore nel recupero dati OHLCV per BTC/USDT su binance: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2025-09-05 11:36:25,151 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:36:29,702 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 11:36:29,703 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-09-05 11:36:29,705 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023A5F0CA630>, 8805.1150981), (<aiohttp.client_proto.ResponseHandler object at 0x0000023A5F0C9DF0>, 8805.3342217), (<aiohttp.client_proto.ResponseHandler object at 0x0000023A5FD69670>, 8807.9258176)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000023A56C0C910>
+2025-09-05 11:36:29,707 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023A63C50530>, 8804.6827569), (<aiohttp.client_proto.ResponseHandler object at 0x0000023A56C5F950>, 8805.3221305), (<aiohttp.client_proto.ResponseHandler object at 0x0000023A5FD6A210>, 8811.1651296)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023A5956FEF0>, 8811.4912982)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000023A56C0F890>
+2025-09-05 11:36:31,018 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:36:37,300 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:36:37,300 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:36:40,945 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:36:40,947 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:36:46,487 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:36:46,488 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:36:52,368 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:37:27,503 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:38:49,990 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 11:38:49,991 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 11:39:03,186 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 11:39:03,652 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-74' coro=<Throttler.looper() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\ccxt\async_support\base\throttler.py:21>>
+2025-09-05 11:39:03,827 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-76' coro=<RequestResponseCycle.run_asgi() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py:407> cb=[set.discard()]>
+2025-09-05 11:39:03,829 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-77' coro=<RequestResponseCycle.run_asgi() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py:407> cb=[set.discard()]>
+2025-09-05 11:39:03,835 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-78' coro=<RequestResponseCycle.run_asgi() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py:407> cb=[set.discard()]>
+2025-09-05 11:39:03,835 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-67' coro=<RequestResponseCycle.run_asgi() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py:409> wait_for=<Task pending name='Task-70' coro=<Exchange.load_markets_helper() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\ccxt\async_support\base\exchange.py:286> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]> cb=[set.discard()]>
+2025-09-05 11:39:03,835 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-68' coro=<RequestResponseCycle.run_asgi() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py:409> wait_for=<Task pending name='Task-71' coro=<Exchange.load_markets_helper() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\ccxt\async_support\base\exchange.py:286> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]> cb=[set.discard()]>
+2025-09-05 11:39:03,836 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-75' coro=<RequestResponseCycle.run_asgi() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py:407> cb=[set.discard()]>
+2025-09-05 11:39:03,884 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-70' coro=<Exchange.load_markets_helper() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\ccxt\async_support\base\exchange.py:286> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]>
+2025-09-05 11:39:03,911 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-71' coro=<Exchange.load_markets_helper() running at C:\Users\AAVV\AppData\Local\Programs\Python\Python313\Lib\site-packages\ccxt\async_support\base\exchange.py:286> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[Task.task_wakeup()]>
+2025-09-05 11:39:09,403 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 11:39:09,403 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 11:39:22,037 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 11:39:22,433 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:39:37,488 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:39:37,490 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:39:53,440 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:39:53,441 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:40:08,313 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:40:08,313 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:40:16,785 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:40:21,215 - INFO - AI: Analizzando BTC/USDT su cryptocom...
+2025-09-05 11:40:23,810 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:40:23,811 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:40:23,908 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:40:24,006 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:40:24,569 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:40:24,569 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:40:24,570 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:40:24,570 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:40:27,865 - INFO - AI: Segnale None per BTC/USDT. Nessuna operazione.
+2025-09-05 11:40:27,886 - INFO - AI: Analizzando ETH/USDT su cryptocom...
+2025-09-05 11:40:31,583 - INFO - AI: Segnale None per ETH/USDT. Nessuna operazione.
+2025-09-05 11:40:31,583 - INFO - AI: Analizzando TON/USDT su cryptocom...
+2025-09-05 11:40:34,587 - INFO - AI: Segnale None per TON/USDT. Nessuna operazione.
+2025-09-05 11:40:34,588 - INFO - AI: Analizzando DOGE/USDT su cryptocom...
+2025-09-05 11:40:37,547 - INFO - AI: Segnale None per DOGE/USDT. Nessuna operazione.
+2025-09-05 11:41:40,210 - WARNING - Prezzo USDT per BTC non disponibile per calcolo controvalore.
+2025-09-05 11:41:40,212 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:41:40,214 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:41:40,216 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:41:40,219 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:44:17,642 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:44:21,261 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:44:21,262 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:44:23,016 - WARNING - Prezzo USDT per LUNA2 non disponibile per calcolo controvalore.
+2025-09-05 11:44:34,227 - INFO - Logging configurato. Livello: INFO, Percorso: log/backend.log
+2025-09-05 11:44:34,228 - INFO - Avvio dell'applicazione Trade AI...
+2025-09-05 11:44:42,608 - INFO - Modalità automatica attiva all'avvio. Avvio il bot AI...
+2025-09-05 11:44:42,924 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:44:52,601 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:44:52,602 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:44:59,849 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:44:59,849 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:45:07,332 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:45:07,333 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:45:14,881 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:48:45,138 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:48:45,139 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:48:45,139 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:48:45,258 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:48:45,260 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:48:45,260 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:50:16,047 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:50:22,089 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:50:22,089 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:50:28,548 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:50:28,549 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:50:34,721 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:50:34,722 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:50:40,012 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:52:07,417 - WARNING - Prezzo USDT per BTC non disponibile per calcolo controvalore.
+2025-09-05 11:52:07,417 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:52:07,417 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:52:07,418 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:55:37,482 - WARNING - Prezzo USDT per BTC non disponibile per calcolo controvalore.
+2025-09-05 11:55:37,482 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:55:37,482 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:55:37,483 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 11:55:44,788 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 11:55:49,580 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 11:55:49,580 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 11:55:53,917 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 11:55:53,919 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 11:55:58,297 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 11:55:58,297 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 11:56:04,193 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 11:56:41,935 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 11:56:41,936 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 11:56:41,937 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:01:04,830 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 12:01:10,447 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 12:01:10,447 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 12:01:19,588 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 12:01:19,588 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 12:01:23,820 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 12:01:23,821 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:01:26,612 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 12:01:26,613 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 12:01:33,183 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 12:04:33,757 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:05:40,981 - WARNING - Prezzo USDT per BTC non disponibile per calcolo controvalore.
+2025-09-05 12:05:40,981 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 12:05:40,982 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 12:05:40,982 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:06:33,770 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 12:06:38,523 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 12:06:38,524 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 12:06:43,346 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 12:06:43,346 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 12:06:50,785 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 12:06:50,785 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 12:06:50,786 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:06:51,414 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 12:06:51,415 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 12:06:56,691 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 12:07:50,966 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 12:07:50,967 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:08:55,900 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 12:08:55,901 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:10:01,089 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:12:02,742 - INFO - AI: Analizzando BTC/USDC su binance...
+2025-09-05 12:12:15,233 - INFO - AI: Segnale None per BTC/USDC. Nessuna operazione.
+2025-09-05 12:12:15,233 - INFO - AI: Analizzando ETH/USDC su binance...
+2025-09-05 12:12:15,341 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.
+2025-09-05 12:12:22,942 - INFO - AI: Segnale None per ETH/USDC. Nessuna operazione.
+2025-09-05 12:12:22,943 - INFO - AI: Analizzando TON/USDC su binance...
+2025-09-05 12:12:31,108 - INFO - AI: Segnale None per TON/USDC. Nessuna operazione.
+2025-09-05 12:12:31,108 - INFO - AI: Analizzando DOGE/USDC su binance...
+2025-09-05 12:12:35,701 - INFO - AI: Segnale None per DOGE/USDC. Nessuna operazione.
+2025-09-05 12:13:10,815 - WARNING - Prezzo USDT per ETH non disponibile per calcolo controvalore.
+2025-09-05 12:13:10,816 - WARNING - Prezzo USDT per DOGE non disponibile per calcolo controvalore.
+2025-09-05 12:13:10,816 - WARNING - Prezzo USDT per TON non disponibile per calcolo controvalore.

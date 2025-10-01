@@ -1,0 +1,116 @@
+{
+  "versione_config": "1.12.0",
+  "impostazioni_generali": {
+    "budget_totale_usd": 250.0,
+    "percentuale_rischio_per_operazione": 10.0,
+    "modalita_automatica_attiva": true,
+    "modalita_reale_attiva": true,
+    "intervallo_aggiornamento_secondi": 300,
+    "intervallo_aggiornamento_dashboard_secondi": 120,
+    "percentuale_prelievo_massimo": null,
+    "min_buy_notional_usd": 15.0,
+    "min_sell_notional_usd": 1.0
+  },
+  "logging": {
+    "percorso_file_log": "log/backend.log",
+    "livello_log": "WARNING"
+  },
+  "piattaforme": {
+    "coinbase": {
+      "attiva": false,
+      "api_key": "LA_TUA_API_KEY_COINBASE",
+      "api_secret": "IL_TUO_API_SECRET_COINBASE",
+      "options": {
+        "defaultType": "spot",
+        "quote_currency": "USDT",
+        "markets": {
+          "spot": true,
+          "futures": false,
+          "delivery": false
+        },
+        "recvWindow": 60000
+      }
+    },
+    "binance": {
+      "attiva": true,
+      "api_key": "G63EkB4JQnmr2Z10yRxSUShX5l0MjaQkH40Db7HtxwXMwa2zztMsA5G2rk6Xiv12",
+      "api_secret": "CGYtwijqs1imcMis3ysixXrZKpy9ILrBi3lIydWTaM3tBbTGphRm6EB8xAyuPvsG",
+      "options": {
+        "defaultType": "spot",
+        "quote_currency": "USDC",
+        "markets": {
+          "spot": true,
+          "futures": null,
+          "delivery": false
+        },
+        "recvWindow": 60000
+      }
+    },
+    "cryptocom": {
+      "attiva": false,
+      "api_key": "X71YFfmk6VVAuH7fGUzTpz",
+      "api_secret": "cxakp_sWaQMwfXKMSXJvDx6hwYCJ",
+      "options": {
+        "defaultType": "spot",
+        "quote_currency": "USDT",
+        "markets": {
+          "spot": true,
+          "futures": null,
+          "delivery": false
+        },
+        "recvWindow": 60000
+      }
+    }
+  },
+  "parametri_ia": {
+    "cripto_preferite": [
+      "BTC",
+      "ETH",
+      "TON",
+      "DOGE",
+      "BNB",
+      "BCH"
+    ],
+    "target_profitto_settimanale_percentuale": 5.0,
+    "stop_loss_percentuale": 3.0
+  },
+  "gestione_rischio_dinamico": {
+    "attiva": true,
+    "moltiplicatore_confidenza_media": 1.5,
+    "moltiplicatore_confidenza_alta": 2.0
+  },
+  "selezione_asset_dinamica": {
+    "attiva": true,
+    "numero_asset_da_considerare": 5
+  },
+  "trailing_stop_loss": {
+    "attiva": true,
+    "percentuale_distanza": 5.0
+  },
+  "analisi_multi_timeframe": {
+    "attiva": true,
+    "timeframes": [
+      "1h",
+      "4h",
+      "1d"
+    ],
+    "pesi": [
+      0.5,
+      0.3,
+      0.2
+    ]
+  },
+  "tassazione": {
+    "percentuale_tasse": 26.0
+  },
+  "parametri_indicatori": {
+    "sma_periodo": 20,
+    "rsi_periodo": 14,
+    "macd_periodo_veloce": 12,
+    "macd_periodo_lento": 26,
+    "macd_periodo_segnale": 9,
+    "bollinger_periodo": 20,
+    "bollinger_deviazioni_std": 2,
+    "adx_periodo": 14
+  }
+}
