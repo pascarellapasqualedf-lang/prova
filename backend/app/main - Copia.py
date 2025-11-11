@@ -23,6 +23,8 @@ ai_trading_task = None # Useremo un task asyncio invece di un thread
 # Lista di attesa per asset venduti di recente (coppia, timestamp)
 asset_venduti_di_recente = []
 
+# Importa le variabili di stato globali
+from .core.app_state import open_connections
 
 # Modelli Pydantic per la validazione della configurazione
 class ImpostazioniGenerali(BaseModel):
@@ -124,14 +126,14 @@ class OperazioneManuale(BaseModel):
     prezzo: float
     tipo_ordine: str = 'market' # Aggiunto il tipo di ordine
 
+from .servizi.gestore_piattaforme import inizializza_piattaforma, recupera_ordini_aperti
 from .core.cervello_ia import analizza_mercato_e_genera_segnale, ottimizza_portafoglio_simulato, suggerisci_strategie_di_mercato
 from .core.gestore_operazioni import gestore_globale_portafoglio
 from .core.prezzi_cache import aggiorna_prezzi_cache, get_prezzo_cache, get_prezzo_eur_cache
-from .core.database import recupera_dati_ohlcv_da_db, create_tables, get_blacklisted_pairs_set, add_to_blacklist, get_blacklist_details, remove_from_blacklist, recupera_operazioni_db, salva_evento_db, recupera_eventi_db, crea_notifica, recupera_notifiche, segna_notifiche_come_lette
+from .core.database import recupera_dati_ohlcv_da_db, create_tables, get_blacklisted_pairs_set, add_to_blacklist, get_blacklist_details, remove_from_blacklist, recupera_operazioni_db, salva_evento_db, recupera_eventi_db, crea_notifica, recupera_notifiche
 
 
-from .servizi.instance_manager import get_platform_instance, close_all_instances
-from .servizi.gestore_piattaforme import recupera_ordini_aperti
+
 
 from .core.cache_manager import get_dashboard_cache, set_dashboard_cache
 from .servizi.market_data_service import aggiorna_e_salva_dati_ohlcv
@@ -313,8 +315,14 @@ async def shutdown_event():
             pass # Il task è stato cancellato, è normale
         logging.info("AI Trading disattivato alla chiusura.")
 
-    # Chiudi tutte le istanze di piattaforma condivise
-    await close_all_instances()
+    # Chiudi tutte le connessioni ccxt aperte
+    logging.info(f"Chiusura di {len(open_connections)} connessioni aperte...")
+    for conn in open_connections:
+        try:
+            await conn.close()
+        except Exception as e:
+            logging.warning(f"Errore durante la chiusura di una connessione: {e}")
+    open_connections.clear()
 
 @app.get("/", tags=["Generale"])
 async def root():
@@ -347,7 +355,7 @@ async def test_connessione_piattaforma(nome_piattaforma: str):
         
         quote_currency = piattaforma_config.get('options', {}).get('quote_currency', 'USDT')
 
-        piattaforma = get_platform_instance(nome_piattaforma.lower())
+        piattaforma = inizializza_piattaforma(nome_piattaforma.lower())
         await piattaforma.load_markets()
         saldo = await piattaforma.fetch_balance()
 
@@ -410,6 +418,9 @@ async def test_connessione_piattaforma(nome_piattaforma: str):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Errore durante la connessione a {nome_piattaforma}: {str(e)}")
+    finally:
+        if 'piattaforma' in locals() and piattaforma:
+            await piattaforma.close()
 
 
 @app.get("/suggerimento_ia/{nome_piattaforma}/{coppia:path}", tags=["Intelligenza Artificiale"])
@@ -424,7 +435,7 @@ async def ottieni_suggerimento_ia(nome_piattaforma: str, coppia: str):
         modalita_reale = config.get('impostazioni_generali', {}).get('modalita_reale_attiva', False)
         
         # Inizializza la piattaforma
-        piattaforma_ccxt = get_platform_instance(nome_piattaforma.lower())
+        piattaforma_ccxt = inizializza_piattaforma(nome_piattaforma.lower())
         await piattaforma_ccxt.load_markets() # Carica i mercati
 
         suggerimento = await analizza_mercato_e_genera_segnale(piattaforma_ccxt, coppia.upper())
@@ -440,7 +451,9 @@ async def ottieni_suggerimento_ia(nome_piattaforma: str, coppia: str):
     except Exception as e:
         logging.error(f"Errore durante l'analisi IA per {nome_piattaforma}/{coppia}: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Errore durante l'analisi IA: {str(e)}")
-
+    finally:
+        if piattaforma_ccxt:
+            await piattaforma_ccxt.close() # Chiudi la connessione
 
 
 @app.get("/ottimizzazione_portafoglio", tags=["Intelligenza Artificiale"])
@@ -465,7 +478,7 @@ async def simula_operazione_ia(nome_piattaforma: str, coppia: str):
     piattaforma_ccxt = None # Initialize to None
     try:
         # Inizializza la piattaforma
-        piattaforma_ccxt = get_platform_instance(nome_piattaforma.lower())
+        piattaforma_ccxt = inizializza_piattaforma(nome_piattaforma.lower())
         await piattaforma_ccxt.load_markets() # Carica i mercati
 
         suggerimento = await analizza_mercato_e_genera_segnale(piattaforma_ccxt, coppia.upper())
@@ -498,7 +511,9 @@ async def simula_operazione_ia(nome_piattaforma: str, coppia: str):
     except Exception as e:
         logging.error(f"Errore durante la simulazione per {nome_piattaforma}/{coppia}: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Errore durante la simulazione: {str(e)}")
-
+    finally:
+        if piattaforma_ccxt:
+            await piattaforma_ccxt.close() # Chiudi la connessione
 
 @app.get("/stato_portafoglio", tags=["Simulazione"])
 async def ottieni_stato_portafoglio():
@@ -536,7 +551,7 @@ async def calcola_e_aggiorna_cache_dashboard():
             logging.warning("Nessuna piattaforma attiva trovata per calcolo cache dashboard.")
             return
 
-        piattaforma_ccxt = get_platform_instance(piattaforma_default)
+        piattaforma_ccxt = inizializza_piattaforma(piattaforma_default)
         try:
             await piattaforma_ccxt.load_markets() # Load markets once
         except ccxt.RequestTimeout as e:
@@ -615,7 +630,9 @@ async def calcola_e_aggiorna_cache_dashboard():
 
     except Exception as e:
         logging.error(f"Errore grave durante il calcolo della cache dashboard: {e}", exc_info=True)
-
+    finally:
+        if piattaforma_ccxt:
+            await piattaforma_ccxt.close()
 
 
 async def dashboard_update_loop():
@@ -715,36 +732,6 @@ async def ottieni_storico_take_profit():
     except Exception as e:
         logging.error(f"Errore durante il recupero dello storico take profit: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Errore nel recupero dello storico take profit.")
-
-@app.get("/analisi_profitto_storico", tags=["Simulazione"])
-async def ottieni_analisi_profitto_storico():
-    """
-    Restituisce le percentuali di profitto/perdita (minima, media, massima) dalle operazioni di vendita.
-    """
-    try:
-        operazioni_dal_db = recupera_operazioni_db(limit=10000) # Recupera un numero sufficiente di operazioni
-        percentuali = []
-        for op in operazioni_dal_db:
-            # Assicurati che op sia un dizionario e che contenga le chiavi necessarie
-            if isinstance(op, dict) and op.get('tipo', '').startswith('vendita'):
-                profitto = op.get('profitto_perdita_operazione', 0)
-                controvalore = op.get('controvalore_usd', 0)
-                costo_operazione = controvalore - profitto
-                if costo_operazione > 0:
-                    percentuale = (profitto / costo_operazione) * 100
-                    percentuali.append(percentuale)
-
-        if not percentuali:
-            return {"min": 0.0, "avg": 0.0, "max": 0.0}
-
-        return {
-            "min": min(percentuali),
-            "avg": sum(percentuali) / len(percentuali),
-            "max": max(percentuali)
-        }
-    except Exception as e:
-        logging.error(f"Errore durante il recupero dell'analisi profitto storico: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail="Errore nel recupero dell'analisi profitto storico.")
 
 @app.get("/analisi_profitto_storico", tags=["Simulazione"])
 async def ottieni_analisi_profitto_storico():
@@ -941,7 +928,7 @@ async def ai_trading_loop():
 
                 piattaforma_ccxt = None
                 try:
-                    piattaforma_ccxt = get_platform_instance(nome_piattaforma)
+                    piattaforma_ccxt = inizializza_piattaforma(nome_piattaforma)
                     if not piattaforma_ccxt.markets:
                         await piattaforma_ccxt.load_markets()
                 except Exception as e:
@@ -1290,7 +1277,7 @@ async def annulla_ordine(nome_piattaforma: str, id_ordine: str, simbolo: str = N
     """
     piattaforma_ccxt = None
     try:
-        piattaforma_ccxt = get_platform_instance(nome_piattaforma.lower())
+        piattaforma_ccxt = inizializza_piattaforma(nome_piattaforma.lower())
         await piattaforma_ccxt.cancel_order(id_ordine, simbolo)
         dettagli_evento = f"Annullato manualmente ordine ID: {id_ordine}"
         salva_evento_db("ANNULLA_ORDINE_MANUALE", piattaforma=nome_piattaforma, coppia=simbolo, dettagli=dettagli_evento)
@@ -1299,6 +1286,9 @@ async def annulla_ordine(nome_piattaforma: str, id_ordine: str, simbolo: str = N
         raise HTTPException(status_code=404, detail=f"Ordine {id_ordine} non trovato.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Errore durante l'annullamento dell'ordine: {str(e)}")
+    finally:
+        if piattaforma_ccxt:
+            await piattaforma_ccxt.close()
 
 
 @app.get("/strategie_di_mercato", tags=["Intelligenza Artificiale"])
