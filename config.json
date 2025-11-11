@@ -1,19 +1,18 @@
 {
-  "versione_config": "1.12.0",
+  "versione_config": "1.19.0",
   "impostazioni_generali": {
     "budget_totale_usd": 250.0,
-    "percentuale_rischio_per_operazione": 10.0,
+    "percentuale_rischio_per_operazione": 4.0,
     "modalita_automatica_attiva": true,
     "modalita_reale_attiva": true,
     "intervallo_aggiornamento_secondi": 300,
     "intervallo_aggiornamento_dashboard_secondi": 120,
-    "percentuale_prelievo_massimo": null,
     "min_buy_notional_usd": 15.0,
-    "min_sell_notional_usd": 1.0
+    "min_sell_notional_usd": 10.0
   },
   "logging": {
     "percorso_file_log": "log/backend.log",
-    "livello_log": "WARNING"
+    "livello_log": "INFO"
   },
   "piattaforme": {
     "coinbase": {
@@ -40,7 +39,7 @@
         "quote_currency": "USDC",
         "markets": {
           "spot": true,
-          "futures": null,
+          "futures": false,
           "delivery": false
         },
         "recvWindow": 60000
@@ -72,19 +71,23 @@
       "BCH"
     ],
     "target_profitto_settimanale_percentuale": 5.0,
-    "stop_loss_percentuale": 3.0
+    "stop_loss_percentuale": 3.0,
+    "percentuale_take_profit": 6.0,
+    "orario_reset_cooldown": "06:00",
+    "attiva_cooldown_dopo_vendita": false
   },
   "gestione_rischio_dinamico": {
-    "attiva": true,
+    "attiva": false,
     "moltiplicatore_confidenza_media": 1.5,
     "moltiplicatore_confidenza_alta": 2.0
   },
   "selezione_asset_dinamica": {
-    "attiva": true,
-    "numero_asset_da_considerare": 5
+    "attiva": false,
+    "numero_asset_da_considerare": 8,
+    "ignora_preferiti_con_dinamica": false
   },
   "trailing_stop_loss": {
-    "attiva": true,
+    "attiva": false,
     "percentuale_distanza": 5.0
   },
   "analisi_multi_timeframe": {
