@@ -74,21 +74,24 @@ def create_tables():
         """)
         logging.info("Tabella 'portfolio_history' creata o già esistente.")
 
-        # Tabella per le operazioni (trades)
+        # Tabella per le operazioni di trading
         cursor.execute("""
-        CREATE TABLE IF NOT EXISTS trades (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            exchange TEXT NOT NULL,
-            symbol TEXT NOT NULL,
-            order_id TEXT UNIQUE NOT NULL,
-            timestamp INTEGER NOT NULL,
-            type TEXT NOT NULL, -- 'buy' or 'sell'
-            price REAL NOT NULL,
-            amount REAL NOT NULL,
-            fee REAL
+        CREATE TABLE IF NOT EXISTS operazioni (
+            id_operazione TEXT PRIMARY KEY,
+            timestamp TEXT NOT NULL,
+            piattaforma TEXT NOT NULL,
+            coppia TEXT NOT NULL,
+            tipo TEXT NOT NULL,
+            quantita REAL NOT NULL,
+            prezzo REAL NOT NULL,
+            controvalore_usd REAL NOT NULL,
+            commissioni_usd REAL NOT NULL,
+            profitto_perdita_operazione REAL NOT NULL,
+            motivo_vendita TEXT,
+            percentuale_profitto_perdita REAL -- Nuova colonna
         );
         """)
-        logging.info("Tabella 'trades' creata o già esistente.")
+        logging.info("Tabella 'operazioni' creata o già esistente.")
 
         # Tabella per le coppie in blacklist
         cursor.execute("""
@@ -100,12 +103,135 @@ def create_tables():
         """)
         logging.info("Tabella 'blacklist_coppie' creata o già esistente.")
 
+        # Tabella per gli eventi di sistema/bot
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS eventi (
+            id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT NOT NULL,
+            tipo_evento TEXT NOT NULL, -- Es. 'ANNULLA_ORDINE', 'SEGNALE_MANTIENI', 'ERRORE_API'
+            piattaforma TEXT,
+            coppia TEXT,
+            dettagli TEXT -- Un campo JSON o testuale per info aggiuntive
+        );
+        """)
+        logging.info("Tabella 'eventi' creata o già esistente.")
+
+        # Tabella per le notifiche
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS notifiche (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT NOT NULL,
+            titolo TEXT NOT NULL,
+            messaggio TEXT NOT NULL,
+            letta INTEGER NOT NULL DEFAULT 0 -- 0 per non letta, 1 per letta
+        );
+        """)
+        logging.info("Tabella 'notifiche' creata o già esistente.")
+
         conn.commit()
     except sqlite3.Error as e:
         logging.error(f"Errore durante la creazione delle tabelle: {e}")
     finally:
         if conn:
             conn.close()
+
+
+def salva_evento_db(tipo_evento: str, piattaforma: str = None, coppia: str = None, dettagli: str = None):
+    """Salva un evento generico nel database."""
+    conn = get_db_connection()
+    if not conn:
+        logging.error(f"Impossibile salvare l'evento '{tipo_evento}': connessione DB fallita.")
+        return
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO eventi (timestamp, tipo_evento, piattaforma, coppia, dettagli)
+            VALUES (?, ?, ?, ?, ?)
+        """, (datetime.now().isoformat(), tipo_evento, piattaforma, coppia, dettagli))
+        conn.commit()
+        logging.debug(f"Evento '{tipo_evento}' per {coppia or 'N/A'} salvato nel database.")
+    except sqlite3.Error as e:
+        logging.error(f"Errore durante il salvataggio dell'evento '{tipo_evento}' nel DB: {e}")
+    finally:
+        if conn:
+            conn.close()
+
+def salva_operazione_db(operazione, motivo_vendita: str = None):
+    """Salva una singola operazione nel database."""
+    conn = get_db_connection()
+    if not conn:
+        logging.error(f"Impossibile salvare l'operazione {operazione.id_operazione}: connessione DB fallita.")
+        return
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO operazioni (
+                id_operazione, timestamp, piattaforma, coppia, tipo, quantita, 
+                prezzo, controvalore_usd, commissioni_usd, profitto_perdita_operazione, motivo_vendita, percentuale_profitto_perdita
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            operazione.id_operazione,
+            operazione.timestamp.isoformat(),
+            operazione.piattaforma,
+            operazione.coppia,
+            operazione.tipo,
+            operazione.quantita,
+            operazione.prezzo,
+            operazione.controvalore_usd,
+            operazione.commissioni_usd,
+            operazione.profitto_perdita_operazione,
+            motivo_vendita,
+            operazione.percentuale_profitto_perdita
+        ))
+        conn.commit()
+        logging.info(f"Operazione {operazione.id_operazione} ({operazione.tipo} {operazione.coppia}) salvata nel database.")
+    except sqlite3.Error as e:
+        logging.error(f"Errore durante il salvataggio dell'operazione {operazione.id_operazione} nel DB: {e}")
+    finally:
+        if conn:
+            conn.close()
+
+def recupera_operazioni_db(limit: int = 100) -> list:
+    """Recupera le ultime operazioni dal database."""
+    conn = get_db_connection()
+    if not conn:
+        logging.error("Impossibile recuperare le operazioni: connessione DB fallita.")
+        return []
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM operazioni ORDER BY timestamp DESC LIMIT ?", (limit,))
+        rows = cursor.fetchall()
+        # Converte le righe del database (che sono simili a tuple) in dizionari completi
+        return [dict(row) for row in rows]
+    except sqlite3.Error as e:
+        logging.error(f"Errore durante il recupero delle operazioni dal DB: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+def recupera_eventi_db(limit: int = 100) -> list:
+    """Recupera gli ultimi eventi dal database."""
+    conn = get_db_connection()
+    if not conn:
+        logging.error("Impossibile recuperare gli eventi: connessione DB fallita.")
+        return []
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM eventi ORDER BY timestamp DESC LIMIT ?", (limit,))
+        rows = cursor.fetchall()
+        return [dict(row) for row in rows]
+    except sqlite3.Error as e:
+        logging.error(f"Errore durante il recupero degli eventi dal DB: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
 
 def recupera_dati_ohlcv_da_db(exchange: str, symbol: str, timeframe: str, limit: int):
     """
@@ -219,7 +345,68 @@ def remove_from_blacklist(coppia: str) -> bool:
         if conn:
             conn.close()
 
-if __name__ == '__main__':
-    logging.info("Inizializzazione del database...")
-    create_tables()
-    logging.info("Inizializzazione del database completata.")
+def crea_notifica(titolo: str, messaggio: str):
+    """Crea una nuova notifica nel database."""
+    conn = get_db_connection()
+    if not conn:
+        logging.error(f"Impossibile creare la notifica: connessione DB fallita.")
+        return
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO notifiche (timestamp, titolo, messaggio)
+            VALUES (?, ?, ?)
+        """, (datetime.now().isoformat(), titolo, messaggio))
+        conn.commit()
+        logging.info(f"Notifica creata: {titolo}")
+    except sqlite3.Error as e:
+        logging.error(f"Errore durante la creazione della notifica: {e}")
+    finally:
+        if conn:
+            conn.close()
+
+def recupera_notifiche(solo_non_lette: bool = False, limit: int = 20) -> list:
+    """Recupera le notifiche dal database."""
+    conn = get_db_connection()
+    if not conn:
+        logging.error("Impossibile recuperare le notifiche: connessione DB fallita.")
+        return []
+
+    try:
+        cursor = conn.cursor()
+        query = "SELECT * FROM notifiche"
+        if solo_non_lette:
+            query += " WHERE letta = 0"
+        query += " ORDER BY timestamp DESC LIMIT ?"
+        cursor.execute(query, (limit,))
+        rows = cursor.fetchall()
+        return [dict(row) for row in rows]
+    except sqlite3.Error as e:
+        logging.error(f"Errore durante il recupero delle notifiche dal DB: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+def segna_notifiche_come_lette():
+    """Segna tutte le notifiche come lette."""
+    conn = get_db_connection()
+    if not conn:
+        logging.error(f"Impossibile segnare le notifiche come lette: connessione DB fallita.")
+        return
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE notifiche SET letta = 1 WHERE letta = 0")
+        conn.commit()
+        logging.info(f"{cursor.rowcount} notifiche segnate come lette.")
+    except sqlite3.Error as e:
+        logging.error(f"Errore durante l'aggiornamento delle notifiche: {e}")
+    finally:
+        if conn:
+            conn.close()
+
+logging.info("Inizializzazione del database...")
+create_tables()
+logging.info("Inizializzazione del database completata.")

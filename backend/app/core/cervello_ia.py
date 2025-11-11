@@ -385,15 +385,15 @@ def ottimizza_portafoglio_simulato() -> dict:
     if valore_totale_usd == 0:
         return {
             "suggerimenti": ["Il portafoglio è vuoto o non valutabile."],
-            "composizione_attuale": {},
+            "composizione_attuale": {"BTC": 0, "ETH": 0, "STABLECOIN": 0, "ALTRI": 0},
             "composizione_target": TARGET_IDEALE
         }
 
     composizione_attuale = {
         "BTC": valori_asset_usd.get("BTC", 0) / valore_totale_usd,
         "ETH": valori_asset_usd.get("ETH", 0) / valore_totale_usd,
-        "STABLECOIN": sum(v for k, v in valori_asset_usd.items() if k.upper() in STABLECOINS) / valore_totale_usd, # Usa .upper()
-        "ALTRI": sum(v for k, v in valori_asset_usd.items() if k.upper() not in ["BTC", "ETH"] + [s.upper() for s in STABLECOINS]) / valore_totale_usd # Usa .upper()
+        "STABLECOIN": sum(v for k, v in valori_asset_usd.items() if k.upper() in STABLECOINS) / valore_totale_usd,
+        "ALTRI": sum(v for k, v in valori_asset_usd.items() if k.upper() not in ["BTC", "ETH"] + [s.upper() for s in STABLECOINS]) / valore_totale_usd
     }
 
     suggerimenti = []
@@ -414,11 +414,13 @@ def ottimizza_portafoglio_simulato() -> dict:
     if not suggerimenti:
         suggerimenti.append("Il portafoglio è ben bilanciato secondo il modello target.")
 
-    return {
+    response_data = {
         "suggerimenti": suggerimenti,
         "composizione_attuale": {k: round(v, 4) for k, v in composizione_attuale.items()},
         "composizione_target": TARGET_IDEALE
     }
+    logging.debug(f"Output ottimizzazione portafoglio: {response_data}")
+    return response_data
 
 # --- Nuova Logica per Strategie di Mercato ---
 

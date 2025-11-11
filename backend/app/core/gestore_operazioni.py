@@ -5,65 +5,33 @@ import uuid
 import ccxt.async_support as ccxt # Importa ccxt per operazioni reali
 import json
 import logging
+from ..core.gestore_configurazione import carica_configurazione
+
 from datetime import datetime # Aggiunto
 from ..modelli.portafoglio import Portafoglio
 from ..modelli.operazione import Operazione
 from ..modelli.posizioni import PosizioneAperta # Aggiunto
-from ..core.gestore_configurazione import carica_configurazione
+from ..core.database import salva_operazione_db, recupera_operazioni_db, salva_evento_db, crea_notifica # Aggiunto crea_notifica
+from ..core.gestore_configurazione import carica_configurazione # Aggiunto per risolvere NameError
 from ..servizi.gestore_piattaforme import inizializza_piattaforma # Importa per inizializzare piattaforme reali
 
 class GestorePortafoglio:
     """
-    Gestisce lo stato e le operazioni di un portafoglio di trading virtuale.
+    Gestisce lo stato e le operazioni di un portafoglio di trading.
+    Lo stato viene inizializzato vuoto e poi popolato dalla riconciliazione con l'exchange.
     """
     def __init__(self):
-        self.file_stato = "data/portfolio_state.json"
-        self.portafoglio = None
-        self.storico_valore_portafoglio = []
-        self.load_state()
-
-    def load_state(self):
         config = carica_configurazione()
-        try:
-            with open(self.file_stato, 'r') as f:
-                data = json.load(f)
-                self.portafoglio = Portafoglio(**data['portafoglio'])
-                self.storico_valore_portafoglio = data.get('storico_valore_portafoglio', [])
-            logging.info(f"Stato del portafoglio caricato da {self.file_stato}.")
-        except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
-            logging.warning(f"File di stato '{self.file_stato}' non trovato o corrotto ({e}). Inizializzo un nuovo portafoglio.")
-            budget_iniziale = config['impostazioni_generali']['budget_totale_usd']
-            self.portafoglio = Portafoglio(
-                budget_usd_iniziale=budget_iniziale,
-                budget_usd_corrente=budget_iniziale
-            )
-            self.storico_valore_portafoglio = []
-
-        # Sincronizza gli asset dal config al portafoglio
-        cripto_preferite = config.get('parametri_ia', {}).get('cripto_preferite', [])
-        asset_aggiunti = False
-        for asset in cripto_preferite:
-            if asset not in self.portafoglio.asset:
-                self.portafoglio.asset[asset] = 0.0
-                asset_aggiunti = True
-                logging.info(f"Nuovo asset '{asset}' da config.json aggiunto al portafoglio con saldo 0.")
-        
-        if asset_aggiunti:
-            logging.info("Il portafoglio è stato aggiornato con nuovi asset dalla configurazione.")
-        
-        logging.debug(f"Asset nel portafoglio dopo la sincronizzazione: {list(self.portafoglio.asset.keys())}")
-
-    def save_state(self):
-        try:
-            with open(self.file_stato, 'w') as f:
-                data = {
-                    'portafoglio': self.portafoglio.dict(),
-                    'storico_valore_portafoglio': self.storico_valore_portafoglio
-                }
-                json.dump(data, f, indent=4)
-            logging.debug(f"Stato del portafoglio salvato con successo in {self.file_stato}.")
-        except Exception as e:
-            logging.error(f"Errore durante il salvataggio dello stato in {self.file_stato}: {e}")
+        budget_iniziale = config['impostazioni_generali']['budget_totale_usd']
+        operazioni_raw = recupera_operazioni_db()
+        storico_operazioni = [Operazione(**op) for op in operazioni_raw]
+        self.portafoglio = Portafoglio(
+            budget_usd_iniziale=budget_iniziale,
+            budget_usd_corrente=budget_iniziale, # Verrà sovrascritto dalla riconciliazione
+            storico_operazioni=storico_operazioni
+        )
+        self.storico_valore_portafoglio = []
+        logging.info("GestorePortafoglio inizializzato. In attesa di riconciliazione.")
 
     async def esegui_acquisto(self, piattaforma_id: str, coppia: str, quantita_da_comprare: float, prezzo: float, tipo_ordine: str = 'market', stop_loss_price: float = None):
         config = carica_configurazione()
@@ -74,11 +42,12 @@ class GestorePortafoglio:
         profitto_perdita_operazione = 0.0
         quantita_eseguita = 0.0
         prezzo_medio = 0.0
+        take_profit_price = None
 
         if modalita_reale:
             logging.info(f"Esecuzione ACQUISTO REALE ({tipo_ordine.upper()}) di {quantita_da_comprare} {coppia} su {piattaforma_id}...")
             min_notional_from_config = config['impostazioni_generali']['min_buy_notional_usd']
-            if controvalore < min_notional_from_config:
+            if controvalore < (min_notional_from_config - 0.0001):
                 raise ValueError(f"Valore nozionale dell'ordine ({controvalore:.4f}) inferiore al minimo richiesto di {min_notional_from_config}")
 
             piattaforma_reale = None
@@ -101,69 +70,40 @@ class GestorePortafoglio:
                         if 'cost' in fee and isinstance(fee['cost'], (int, float)):
                             commissioni_usd += fee['cost']
                 logging.info(f"ACQUISTO REALE completato: {quantita_eseguita} {coppia} a {prezzo_medio}. Commissioni: {commissioni_usd}")
+                crea_notifica(titolo=f"Acquisto Eseguito: {coppia}", messaggio=f"Acquistati {quantita_eseguita:.6f} di {simbolo_base} al prezzo di {prezzo_medio:.2f} USD.")
 
                 trailing_sl_config = config.get('trailing_stop_loss', {})
-                if stop_loss_price and stop_loss_price > 0 and quantita_eseguita > 0:
-                    logging.info(f"Piazzando ordine STOP LOSS STATICO per {quantita_eseguita} {coppia} a {stop_loss_price}...")
-                    try:
-                        params = {'stopPrice': stop_loss_price}
-                        stop_loss_order = await piattaforma_reale.create_order(coppia, 'stop_loss', 'sell', quantita_eseguita, price=None, params=params)
-                        logging.info(f"Ordine STOP LOSS STATICO piazzato con successo: ID {stop_loss_order['id']}")
-                    except Exception as sl_error:
-                        logging.warning(f"Errore durante il piazzamento dell'ordine stop loss statico: {sl_error}")
-                elif trailing_sl_config.get('attiva') and quantita_eseguita > 0:
-                    distanza_perc = trailing_sl_config.get('percentuale_distanza')
-                    if distanza_perc is not None and distanza_perc > 0:
-                        logging.info(f"Piazzando ordine TRAILING STOP LOSS per {quantita_eseguita} {coppia} con una distanza del {distanza_perc}%")
+                if trailing_sl_config.get('attiva') and quantita_eseguita > 0:
+                    if stop_loss_price and stop_loss_price > 0:
+                        logging.info(f"Piazzando ordine STOP LOSS STATICO per {quantita_eseguita} {coppia} a {stop_loss_price}...")
                         try:
-                            activation_price = prezzo_medio * (1 - distanza_perc / 100)
-                            params = { 'trailing': True, 'stopPrice': activation_price }
-                            trailing_order = await piattaforma_reale.create_order(coppia, 'stop_loss', 'sell', quantita_eseguita, price=None, params=params)
-                            logging.info(f"Ordine TRAILING STOP LOSS piazzato con successo: ID {trailing_order['id']}")
-                        except Exception as tsl_error:
-                            logging.warning(f"Errore durante il piazzamento dell'ordine trailing stop loss: {tsl_error}. Verificare se la piattaforma supporta questa funzione.")
+                            params = {'stopPrice': stop_loss_price}
+                            stop_loss_order = await piattaforma_reale.create_order(coppia, 'stop_loss', 'sell', quantita_eseguita, price=None, params=params)
+                            salva_evento_db("PIAZZA_STOP_LOSS", piattaforma=piattaforma_id, coppia=coppia, dettagli=f"ID: {stop_loss_order['id']}")
+                        except Exception as sl_error:
+                            logging.warning(f"Errore durante il piazzamento dell'ordine stop loss statico: {sl_error}")
+                
+                percentuale_take_profit = config.get('parametri_ia', {}).get('percentuale_take_profit')
+                if percentuale_take_profit and percentuale_take_profit > 0 and quantita_eseguita > 0:
+                    take_profit_price = prezzo_medio * (1 + percentuale_take_profit / 100)
+                    logging.info(f"Obiettivo Take Profit calcolato per {coppia}: {take_profit_price:.4f}")
 
-            except ccxt.BadRequest as e:
-                if 'NOTIONAL' in str(e):
-                    logging.error(f"Acquisto per {coppia} non eseguito: valore nozionale troppo piccolo.")
-                    return None
-                else:
-                    raise ValueError(f"Errore di richiesta (BadRequest) dall'exchange {piattaforma_id}: {e}")
             except ccxt.InsufficientFunds as e:
-                raise ValueError(f"Fondi insufficienti sulla piattaforma {piattaforma_id}: {e}")
-            except ccxt.NetworkError as e:
-                raise ValueError(f"Errore di rete con la piattaforma {piattaforma_id}: {e}")
-            except ccxt.ExchangeError as e:
-                raise ValueError(f"Errore dell'exchange {piattaforma_id}: {e}")
-            except Exception as e:
-                raise ValueError(f"Errore sconosciuto durante l'acquisto reale su {piattaforma_id}: {e}")
+                logging.warning(f"Fondi insufficienti su {piattaforma_id} per {coppia}. Dettagli: {e}")
+                raise e # Rilancia l'eccezione specifica per essere gestita nel loop principale
             finally:
                 if piattaforma_reale:
                     await piattaforma_reale.close()
 
-        else: # Modalità simulata
-            logging.info(f"Esecuzione ACQUISTO SIMULATO ({tipo_ordine.upper()}) di {quantita_da_comprare} {coppia} su {piattaforma_id}...")
-            if tipo_ordine == 'limit' and (prezzo is None or prezzo <= 0):
-                raise ValueError("Prezzo limite non valido per ordine LIMIT simulato.")
-            if self.portafoglio.budget_usd_corrente < controvalore:
-                raise ValueError("Budget insufficiente per eseguire l'acquisto simulato.")
+        else:
             quantita_eseguita = quantita_da_comprare
             prezzo_medio = prezzo
 
         self.portafoglio.budget_usd_corrente -= (quantita_eseguita * prezzo_medio) + commissioni_usd
         self.portafoglio.asset[simbolo_base] = self.portafoglio.asset.get(simbolo_base, 0) + quantita_eseguita
-        nuova_operazione = Operazione(
-            id_operazione=str(uuid.uuid4()),
-            piattaforma=piattaforma_id,
-            coppia=coppia,
-            tipo=f'acquisto_{"reale" if modalita_reale else "simulato"}_{tipo_ordine}',
-            quantita=quantita_eseguita,
-            prezzo=prezzo_medio,
-            controvalore_usd=(quantita_eseguita * prezzo_medio),
-            commissioni_usd=commissioni_usd,
-            profitto_perdita_operazione=profitto_perdita_operazione
-        )
-        self.portafoglio.storico_operazioni.append(nuova_operazione)
+        tipo_operazione = f'acquisto_{"reale" if modalita_reale else "simulato"}_{tipo_ordine}'
+        nuova_operazione = Operazione(id_operazione=str(uuid.uuid4()), piattaforma=piattaforma_id, coppia=coppia, tipo=tipo_operazione, quantita=quantita_eseguita, prezzo=prezzo_medio, controvalore_usd=(quantita_eseguita * prezzo_medio), commissioni_usd=commissioni_usd, profitto_perdita_operazione=profitto_perdita_operazione)
+        salva_operazione_db(nuova_operazione, motivo_vendita=None)
 
         if simbolo_base in self.portafoglio.posizioni_aperte:
             pos = self.portafoglio.posizioni_aperte[simbolo_base]
@@ -173,16 +113,10 @@ class GestorePortafoglio:
             pos.prezzo_medio_acquisto = nuovo_prezzo_medio
             pos.commissioni_totali_acquisto += commissioni_usd
         else:
-            self.portafoglio.posizioni_aperte[simbolo_base] = PosizioneAperta(
-                coppia=coppia,
-                quantita=quantita_eseguita,
-                prezzo_medio_acquisto=prezzo_medio,
-                commissioni_totali_acquisto=commissioni_usd
-            )
-        logging.debug(f"Posizioni aperte dopo acquisto: {self.portafoglio.posizioni_aperte}")
+            self.portafoglio.posizioni_aperte[simbolo_base] = PosizioneAperta(coppia=coppia, quantita=quantita_eseguita, prezzo_medio_acquisto=prezzo_medio, commissioni_totali_acquisto=commissioni_usd, take_profit_price=take_profit_price)
         return nuova_operazione
 
-    async def esegui_vendita(self, piattaforma_id: str, coppia: str, quantita_da_vendere: float, prezzo: float, tipo_ordine: str = 'market'):
+    async def esegui_vendita(self, piattaforma_id: str, coppia: str, quantita_da_vendere: float, prezzo: float, tipo_ordine: str = 'market', motivo: str = 'SEGNALE_IA'):
         config = carica_configurazione()
         modalita_reale = config['impostazioni_generali']['modalita_reale_attiva']
         simbolo_base, simbolo_quotazione = coppia.split('/')
@@ -193,144 +127,68 @@ class GestorePortafoglio:
         prezzo_medio = 0.0
 
         if modalita_reale:
-            logging.info(f"Esecuzione VENDITA REALE ({tipo_ordine.upper()}) di {quantita_da_vendere} {coppia} su {piattaforma_id}...")
-            min_notional_from_config = config['impostazioni_generali']['min_sell_notional_usd']
-            if controvalore < min_notional_from_config:
-                raise ValueError(f"Valore nozionale dell'ordine ({controvalore:.4f}) inferiore al minimo richiesto di {min_notional_from_config}")
-
             piattaforma_reale = None
             try:
                 piattaforma_reale = inizializza_piattaforma(piattaforma_id)
-                order = None
-                if tipo_ordine == 'market':
-                    order = await piattaforma_reale.create_market_sell_order(coppia, quantita_da_vendere)
-                elif tipo_ordine == 'limit':
-                    if prezzo is None or prezzo <= 0:
-                        raise ValueError("Prezzo limite non valido per ordine LIMIT.")
-                    order = await piattaforma_reale.create_limit_sell_order(coppia, quantita_da_vendere, prezzo)
-                else:
-                    raise ValueError(f"Tipo di ordine non supportato: {tipo_ordine}")
-                
+                order = await piattaforma_reale.create_market_sell_order(coppia, quantita_da_vendere)
                 quantita_eseguita = order['filled']
                 prezzo_medio = order['average'] if order['average'] is not None else prezzo
                 if 'fees' in order and isinstance(order['fees'], list):
                     for fee in order['fees']:
                         if 'cost' in fee and isinstance(fee['cost'], (int, float)):
                             commissioni_usd += fee['cost']
-                logging.info(f"VENDITA REALE completata: {quantita_eseguita} {coppia} a {prezzo_medio}. Commissioni: {commissioni_usd}")
-
+                
+                # Calcola il profitto PRIMA di inviare la notifica
                 if simbolo_base in self.portafoglio.posizioni_aperte:
                     pos = self.portafoglio.posizioni_aperte[simbolo_base]
-                    costo_acquisto_proporzionale = (quantita_eseguita / pos.quantita) * (pos.quantita * pos.prezzo_medio_acquisto + pos.commissioni_totali_acquisto)
-                    profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd - costo_acquisto_proporzionale
+                    costo_acquisto = pos.prezzo_medio_acquisto * quantita_eseguita
+                    ricavo_vendita = (quantita_eseguita * prezzo_medio) - commissioni_usd
+                    profitto_perdita_operazione = ricavo_vendita - costo_acquisto
+                    logging.info(f"Calcolo P/L per {coppia}: Ricavo={ricavo_vendita:.2f}, Costo={costo_acquisto:.2f}, P/L={profitto_perdita_operazione:.2f}")
                 else:
-                    profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd
+                    profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd # Non si può calcolare il P/L reale senza posizione
 
-            except ccxt.BadRequest as e:
-                if 'NOTIONAL' in str(e):
-                    logging.error(f"Vendita per {coppia} non eseguita: valore nozionale troppo piccolo.")
-                    return None
-                else:
-                    raise ValueError(f"Errore di richiesta (BadRequest) dall'exchange {piattaforma_id}: {e}")
-            except ccxt.InsufficientFunds as e:
-                raise ValueError(f"Fondi insufficienti sulla piattaforma {piattaforma_id}: {e}")
-            except ccxt.NetworkError as e:
-                raise ValueError(f"Errore di rete con la piattaforma {piattaforma_id}: {e}")
-            except ccxt.ExchangeError as e:
-                raise ValueError(f"Errore dell'exchange {piattaforma_id}: {e}")
-            except Exception as e:
-                raise ValueError(f"Errore sconosciuto durante la vendita reale su {piattaforma_id}: {e}")
+                logging.info(f"VENDITA REALE completata: {quantita_eseguita} {coppia} a {prezzo_medio}. Commissioni: {commissioni_usd}")
+                crea_notifica(
+                    titolo=f"Vendita Eseguita: {coppia}",
+                    messaggio=f"Venduti {quantita_eseguita:.6f} di {simbolo_base} a {prezzo_medio:.2f}. P/L: {profitto_perdita_operazione:.2f} USD"
+                )
             finally:
                 if piattaforma_reale:
                     await piattaforma_reale.close()
-
-        else: # Modalità simulata
-            logging.info(f"Esecuzione VENDITA SIMULATA ({tipo_ordine.upper()}) di {quantita_da_vendere} {coppia} su {piattaforma_id}...")
-            if tipo_ordine == 'limit' and (prezzo is None or prezzo <= 0):
-                raise ValueError("Prezzo limite non valido per ordine LIMIT simulato.")
-            if self.portafoglio.asset.get(simbolo_base, 0) < quantita_da_vendere:
-                raise ValueError(f"Quantità di {simbolo_base} insufficiente per eseguire la vendita simulata.")
+        else:
             quantita_eseguita = quantita_da_vendere
             prezzo_medio = prezzo
 
-            if simbolo_base in self.portafoglio.posizioni_aperte:
-                pos = self.portafoglio.posizioni_aperte[simbolo_base]
-                costo_acquisto_proporzionale = (quantita_da_vendere / pos.quantita) * (pos.quantita * pos.prezzo_medio_acquisto + pos.commissioni_totali_acquisto)
-                profitto_perdita_operazione = controvalore - costo_acquisto_proporzionale
+        if simbolo_base in self.portafoglio.posizioni_aperte:
+            pos = self.portafoglio.posizioni_aperte[simbolo_base]
+            costo_acquisto_proporzionale = (quantita_eseguita / pos.quantita) * (pos.quantita * pos.prezzo_medio_acquisto + pos.commissioni_totali_acquisto)
+            profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd - costo_acquisto_proporzionale
+            
+            # Calcola la percentuale di profitto/perdita
+            if costo_acquisto_proporzionale > 0:
+                percentuale_profitto_perdita = (profitto_perdita_operazione / costo_acquisto_proporzionale) * 100
             else:
-                profitto_perdita_operazione = controvalore
+                percentuale_profitto_perdita = 0.0
+
+            pos.quantita -= quantita_eseguita
+            if pos.quantita <= 1e-9:
+                del self.portafoglio.posizioni_aperte[simbolo_base]
+        else:
+            profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd
+            percentuale_profitto_perdita = 0.0 # Non possiamo calcolare la percentuale senza un costo di acquisto
 
         self.portafoglio.profitto_perdita_totale_usd += profitto_perdita_operazione
         self.portafoglio.budget_usd_corrente += (quantita_eseguita * prezzo_medio) - commissioni_usd
         self.portafoglio.asset[simbolo_base] -= quantita_eseguita
 
-        nuova_operazione = Operazione(
-            id_operazione=str(uuid.uuid4()),
-            piattaforma=piattaforma_id,
-            coppia=coppia,
-            tipo=f'vendita_{"reale" if modalita_reale else "simulata"}_{tipo_ordine}',
-            quantita=quantita_eseguita,
-            prezzo=prezzo_medio,
-            controvalore_usd=(quantita_eseguita * prezzo_medio),
-            commissioni_usd=commissioni_usd,
-            profitto_perdita_operazione=profitto_perdita_operazione
-        )
-        self.portafoglio.storico_operazioni.append(nuova_operazione)
-
-        if simbolo_base in self.portafoglio.posizioni_aperte:
-            pos = self.portafoglio.posizioni_aperte[simbolo_base]
-            pos.quantita -= quantita_eseguita
-            if pos.quantita <= 0.000001: # Usa una piccola soglia per evitare problemi di precisione float
-                del self.portafoglio.posizioni_aperte[simbolo_base]
-        logging.debug(f"Posizioni aperte dopo vendita: {self.portafoglio.posizioni_aperte}")
+        tipo_operazione = f'vendita_{"reale" if modalita_reale else "simulata"}_{tipo_ordine}'
+        nuova_operazione = Operazione(id_operazione=str(uuid.uuid4()), piattaforma=piattaforma_id, coppia=coppia, tipo=tipo_operazione, quantita=quantita_eseguita, prezzo=prezzo_medio, controvalore_usd=(quantita_eseguita * prezzo_medio), commissioni_usd=commissioni_usd, profitto_perdita_operazione=profitto_perdita_operazione, percentuale_profitto_perdita=percentuale_profitto_perdita)
+        salva_operazione_db(nuova_operazione, motivo_vendita=motivo)
         return nuova_operazione
 
     def ottieni_stato_portafoglio(self):
         return self.portafoglio
-
-    async def _registra_valore_portafoglio(self):
-        from .prezzi_cache import get_prezzo_cache, aggiorna_prezzi_cache
-        from ..servizi.gestore_piattaforme import inizializza_piattaforma
-        config = carica_configurazione()
-        piattaforme_config = config['piattaforme']
-        first_active_platform_name = next((p for p, conf in piattaforme_config.items() if p != '_comment' and conf.get('attiva')), None)
-        quote_currency = "USDT"
-        if first_active_platform_name:
-            first_active_platform_conf = piattaforme_config.get(first_active_platform_name)
-            quote_currency = first_active_platform_conf.get('options', {}).get('quote_currency', 'USDT')
-
-        assets_posseduti = [asset for asset, quantita in self.portafoglio.asset.items() if quantita > 0 and asset.upper() not in ['USDT', 'BUSD', 'USDC', 'DAI', 'EUR']]
-        if assets_posseduti:
-            try:
-                if first_active_platform_name:
-                    piattaforma_ccxt = inizializza_piattaforma(first_active_platform_name)
-                    await aggiorna_prezzi_cache(piattaforma_ccxt, assets_posseduti, quote_currency)
-                    await piattaforma_ccxt.close()
-                    logging.debug(f"Cache prezzi aggiornata per: {assets_posseduti} usando {first_active_platform_name} con {quote_currency}")
-                else:
-                    logging.warning("Nessuna piattaforma attiva trovata per aggiornare la cache prezzi per il calcolo storico.")
-            except Exception as e:
-                logging.warning(f"Errore durante l'aggiornamento della cache prezzi per il calcolo storico: {e}")
-
-        valore_totale = self.portafoglio.budget_usd_corrente
-        for asset, quantita in self.portafoglio.asset.items():
-            if quantita > 0:
-                if asset.upper() in ['USDT', 'BUSD', 'USDC', 'DAI', 'EUR']:
-                    valore_totale += quantita
-                else:
-                    prezzo = get_prezzo_cache(asset, quote_currency)
-                    if prezzo is not None:
-                        valore_asset = quantita * prezzo
-                        valore_totale += valore_asset
-                        logging.debug(f"Asset {asset}: Quantità={quantita}, Prezzo={prezzo}, Valore={valore_asset}")
-                    else:
-                        logging.warning(f"Prezzo per {asset} non disponibile in cache per calcolo storico valore. Usando 0 per questo asset.")
-
-        self.storico_valore_portafoglio.append({
-            "timestamp": datetime.now().isoformat(),
-            "valore_usd": valore_totale
-        })
-        logging.debug(f"Valore portafoglio registrato: {valore_totale}")
 
     def ottieni_storico_valore_portafoglio(self):
         return self.storico_valore_portafoglio
@@ -380,7 +238,7 @@ class GestorePortafoglio:
         reconciled_assets = {}
         all_assets_to_fetch_price = set()
         stablecoins = ['USDT', 'BUSD', 'USDC', 'DAI', 'EUR']
-        logging.debug("Inizio riconciliazione saldi con exchange...")
+        logging.info("--- Inizio Riconciliazione Saldi con Exchange ---")
         for nome_piattaforma, conf_piattaforma in piattaforme_config.items():
             if not conf_piattaforma.get('attiva') or nome_piattaforma == '_comment':
                 continue
@@ -388,12 +246,8 @@ class GestorePortafoglio:
             try:
                 piattaforma_ccxt = inizializza_piattaforma(nome_piattaforma)
                 balance = await piattaforma_ccxt.fetch_balance()
-                all_balances = {}
-                for asset, amount in balance.get('free', {}).items():
-                    all_balances[asset] = all_balances.get(asset, 0.0) + float(amount)
-                for asset, amount in balance.get('used', {}).items():
-                    all_balances[asset] = all_balances.get(asset, 0.0) + float(amount)
-                logging.debug(f"Saldi grezzi da {nome_piattaforma}: {all_balances}\n")
+                all_balances = balance.get('total', {}) # Usiamo il saldo totale (free + used)
+                logging.debug(f"Saldi totali da {nome_piattaforma}: {all_balances}")
                 for asset, amount in all_balances.items():
                     if amount > 0:
                         if asset.upper() in stablecoins:
@@ -406,6 +260,9 @@ class GestorePortafoglio:
             finally:
                 if piattaforma_ccxt:
                     await piattaforma_ccxt.close()
+
+        logging.info(f"Stablecoin liquide totali: {liquid_stablecoin_balance:.2f} USD")
+
         if all_assets_to_fetch_price:
             try:
                 first_active_platform_name = next((p for p, conf in piattaforme_config.items() if p != '_comment' and conf.get('attiva')), None)
@@ -413,21 +270,32 @@ class GestorePortafoglio:
                 if first_active_platform_name:
                     first_active_platform_conf = piattaforme_config.get(first_active_platform_name)
                     quote_currency_for_cache = first_active_platform_conf.get('options', {}).get('quote_currency', 'USDT')
-                if first_active_platform_name:
                     piattaforma_cache = inizializza_piattaforma(first_active_platform_name)
                     await aggiorna_prezzi_cache(piattaforma_cache, list(all_assets_to_fetch_price), quote_currency_for_cache)
                     await piattaforma_cache.close()
             except Exception as e:
                 logging.error(f"Errore durante l'aggiornamento prezzi per riconciliazione: {e}")
 
-        cripto_preferite = config.get('parametri_ia', {}).get('cripto_preferite', [])
-        for asset in cripto_preferite:
-            if asset not in reconciled_assets:
-                reconciled_assets[asset] = 0.0
-                logging.debug(f"Aggiunto asset preferito '{asset}' al portafoglio con saldo 0.")
+        crypto_assets_value_usd = 0.0
+        for asset, quantita in reconciled_assets.items():
+            prezzo = get_prezzo_cache(asset, quote_currency_for_cache)
+            if prezzo is not None:
+                valore_asset = quantita * prezzo
+                crypto_assets_value_usd += valore_asset
+                logging.info(f"  - Asset: {asset}, Quantità: {quantita}, Prezzo: {prezzo:.4f}, Valore: {valore_asset:.2f} USD")
+            else:
+                logging.warning(f"Prezzo per {asset} non disponibile. L'asset non sarà incluso nel valore totale del portafoglio.")
+
+        total_reconciled_value_usd = liquid_stablecoin_balance + crypto_assets_value_usd
 
         self.portafoglio.asset = reconciled_assets
-        self.portafoglio.budget_usd_corrente = liquid_stablecoin_balance
-        logging.debug(f"Riconciliazione completata. Portafoglio: Asset={self.portafoglio.asset}, Budget Corrente={self.portafoglio.budget_usd_corrente}")
+        self.portafoglio.budget_usd_corrente = total_reconciled_value_usd
+        
+        if self.portafoglio.budget_usd_iniziale == 0 or self.portafoglio.budget_usd_iniziale == config['impostazioni_generali']['budget_totale_usd']:
+            self.portafoglio.budget_usd_iniziale = total_reconciled_value_usd
+            logging.info(f"Budget INIZIALE del portafoglio impostato a: {total_reconciled_value_usd:.2f} USD")
+
+        logging.info(f"Valore Totale Riconciliato: {total_reconciled_value_usd:.2f} USD")
+        logging.info(f"--- Fine Riconciliazione Saldi ---")
 
 gestore_globale_portafoglio = GestorePortafoglio()
