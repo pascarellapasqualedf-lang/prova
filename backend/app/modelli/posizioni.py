@@ -13,3 +13,4 @@ class PosizioneAperta(BaseModel):
     prezzo_medio_acquisto: float
     timestamp_apertura: datetime = Field(default_factory=datetime.now)
     commissioni_totali_acquisto: float = 0.0
+    take_profit_price: float | None = None # Aggiunto per il take profit

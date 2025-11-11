@@ -1,15 +1,18 @@
 # Autore: Pascarella Pasquale Gerardo
 # Versione: 1.0.0
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Dict, List
 from .operazione import Operazione
-from .posizioni import PosizioneAperta # Aggiunto
+from .posizioni import PosizioneAperta
+from datetime import datetime
 
 class Portafoglio(BaseModel):
     """
     Rappresenta lo stato del portafoglio di trading.
     """
+    model_config = ConfigDict(json_encoders={datetime: lambda v: v.isoformat()})
+
     budget_usd_iniziale: float
     budget_usd_corrente: float
     asset: Dict[str, float] = Field(default_factory=dict) # Es. {"BTC": 0.5, "ETH": 10}

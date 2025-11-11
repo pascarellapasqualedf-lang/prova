@@ -18,4 +18,5 @@ class Operazione(BaseModel):
     prezzo: float
     controvalore_usd: float
     commissioni_usd: float
-    profitto_perdita_operazione: float = 0.0 # Nuovo campo per tracciare profitto/perdita di questa operazione
+    profitto_perdita_operazione: float = 0.0
+    percentuale_profitto_perdita: float = 0.0 # Nuovo campo per la percentuale di P/L
