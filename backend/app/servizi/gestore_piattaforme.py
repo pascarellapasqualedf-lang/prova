@@ -42,16 +42,22 @@ def inizializza_piattaforma(nome_piattaforma: str):
         'secret': config_piattaforma['api_secret'],
         'enableRateLimit': True,
         'adjustForTimeDifference': True,
+        'timeout': 30000,  # Aggiunto timeout di 30 secondi
     }
 
     # Aggiungi il blocco 'options' direttamente dalla configurazione dell'utente.
-    # Questo blocco contiene 'defaultType': 'spot' che è la chiave per risolvere il problema.
     if 'options' in config_piattaforma:
-        ccxt_config['options'] = config_piattaforma['options']
+        # Filtra i mercati per includere solo quelli attivati (impostati su True)
+        user_options = config_piattaforma['options'].copy()
+        if 'markets' in user_options:
+            user_options['markets'] = {market: enabled for market, enabled in user_options['markets'].items() if enabled}
+        ccxt_config['options'] = user_options
 
-    istanza = piattaforma_classe(ccxt_config)
-    
-    return istanza
+    piattaforma = piattaforma_classe(ccxt_config)
+    # Aggiungi la piattaforma alla lista delle connessioni aperte
+    from ..core.app_state import open_connections
+    open_connections.append(piattaforma)
+    return piattaforma
 
 async def recupera_ordini_aperti(nome_piattaforma: str, simbolo: str = None):
     """
@@ -94,4 +100,32 @@ async def recupera_ordini_aperti(nome_piattaforma: str, simbolo: str = None):
     finally:
         if istanza and hasattr(istanza, 'close'):
             print(f"[DEBUG] Chiusura istanza piattaforma {nome_piattaforma}.")
+            await istanza.close()
+
+async def cancella_ordine(nome_piattaforma: str, order_id: str, simbolo: str = None):
+    """
+    Annulla un ordine specifico su una piattaforma di scambio.
+
+    Args:
+        nome_piattaforma: Il nome della piattaforma.
+        order_id: L'ID dell'ordine da annullare.
+        simbolo: Il simbolo di trading dell'ordine (opzionale, ma consigliato per alcuni exchange).
+
+    Returns:
+        Un dizionario con lo stato dell'annullamento.
+    """
+    istanza = None
+    try:
+        istanza = inizializza_piattaforma(nome_piattaforma)
+        if istanza.has['cancelOrder']:
+            response = await istanza.cancel_order(order_id, simbolo)
+            logging.info(f"Ordine {order_id} su {nome_piattaforma} annullato con successo.")
+            return {"status": "successo", "order_id": order_id, "response": response}
+        else:
+            raise NotSupported(f"La piattaforma '{nome_piattaforma}' non supporta l'annullamento degli ordini.")
+    except Exception as e:
+        logging.error(f"Errore durante l'annullamento dell'ordine {order_id} su {nome_piattaforma}: {e}")
+        raise # Rilancia l'eccezione
+    finally:
+        if istanza and hasattr(istanza, 'close'):
             await istanza.close()
