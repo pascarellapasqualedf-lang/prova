@@ -982,7 +982,7 @@ async def ai_trading_loop():
                 logging.info(f"AI: Analisi su {len(assets_finali)} asset unificati e filtrati: {assets_finali}")
                 
                 if not assets_finali:
-                    if piattaforma_ccxt: await piattaforma_ccxt.close()
+                    #if piattaforma_ccxt: await piattaforma_ccxt.close()
                     continue
 
                 await aggiorna_prezzi_cache(piattaforma_ccxt, assets_finali, quote_currency)
@@ -1190,8 +1190,7 @@ async def ai_trading_loop():
                         dettagli_evento = f"Errore durante l'analisi di {coppia}: {str(e)}"
                         salva_evento_db("ERRORE_ANALISI", piattaforma=nome_piattaforma, coppia=coppia, dettagli=dettagli_evento)
 
-                if piattaforma_ccxt:
-                    await piattaforma_ccxt.close()
+                #if piattaforma_ccxt: await piattaforma_ccxt.close()
 
             await asyncio.sleep(intervallo)
 
