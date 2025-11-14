@@ -1,0 +1,20 @@
+{
+    "portafoglio": {
+        "budget_usd_iniziale": 138.14827073256998,
+        "budget_usd_corrente": 138.14827073256998,
+        "asset": {
+            "BTC": 5.8e-07,
+            "LTC": 0.00063457,
+            "ETH": 2.256e-05,
+            "BNB": 0.04845161,
+            "ZEN": 0.0005285,
+            "DOGE": 225.13235,
+            "BCH": 0.00086633,
+            "WLD": 0.0844683,
+            "TON": 13.377754,
+            "ETHFI": 0.09491313
+        },
+        "storico_operazioni": [
+            {
+                "id_operazione": "ba96f37f-94c5-45c8-adf0-0e4f1204f63c",
+                "timestamp": 
