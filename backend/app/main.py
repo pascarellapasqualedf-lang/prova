@@ -198,6 +198,7 @@ def setup_logging():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "http://192.168.25.128:5174", # Nuovo IP del frontend
         "http://192.168.48.137:5174",  # URL del tuo frontend
         "http://localhost:5173",
         "http://127.0.0.1:5173",
