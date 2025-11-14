@@ -1,5 +1,5 @@
 {
-  "versione_config": "1.19.0",
+  "versione_config": "1.20.0",
   "impostazioni_generali": {
     "budget_totale_usd": 250.0,
     "percentuale_rischio_per_operazione": 4.0,
@@ -12,7 +12,7 @@
   },
   "logging": {
     "percorso_file_log": "log/backend.log",
-    "livello_log": "INFO"
+    "livello_log": "WARNING"
   },
   "piattaforme": {
     "coinbase": {
