@@ -1,8 +1,8 @@
 {
-  "versione_config": "1.20.0",
+  "versione_config": "1.20.4",
   "impostazioni_generali": {
     "budget_totale_usd": 250.0,
-    "percentuale_rischio_per_operazione": 4.0,
+    "percentuale_rischio_per_operazione": 10.0,
     "modalita_automatica_attiva": true,
     "modalita_reale_attiva": true,
     "intervallo_aggiornamento_secondi": 300,
@@ -12,7 +12,11 @@
   },
   "logging": {
     "percorso_file_log": "log/backend.log",
-    "livello_log": "WARNING"
+    "livello_log": "INFO"
+  },
+  "monitoraggio_sistema": {
+    "max_memory_mb": 4096,
+    "intervallo_controllo_memoria_secondi": 600
   },
   "piattaforme": {
     "coinbase": {
@@ -72,17 +76,17 @@
     ],
     "target_profitto_settimanale_percentuale": 5.0,
     "stop_loss_percentuale": 3.0,
-    "percentuale_take_profit": 6.0,
+    "percentuale_take_profit": 0,
     "orario_reset_cooldown": "06:00",
     "attiva_cooldown_dopo_vendita": false
   },
   "gestione_rischio_dinamico": {
-    "attiva": false,
+    "attiva": true,
     "moltiplicatore_confidenza_media": 1.5,
     "moltiplicatore_confidenza_alta": 2.0
   },
   "selezione_asset_dinamica": {
-    "attiva": false,
+    "attiva": true,
     "numero_asset_da_considerare": 8,
     "ignora_preferiti_con_dinamica": false
   },
@@ -91,7 +95,7 @@
     "percentuale_distanza": 5.0
   },
   "analisi_multi_timeframe": {
-    "attiva": true,
+    "attiva": false,
     "timeframes": [
       "1h",
       "4h",
