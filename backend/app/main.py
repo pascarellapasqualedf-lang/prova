@@ -7,6 +7,10 @@ import asyncio
 import logging
 import time
 import ccxt
+import psutil
+import signal
+import sys
+import shutil
 from ccxt import TRUNCATE
 from logging.handlers import TimedRotatingFileHandler
 from typing import Optional # Aggiunto
@@ -38,6 +42,10 @@ class ImpostazioniGenerali(BaseModel):
 class LoggingConfig(BaseModel):
     percorso_file_log: str
     livello_log: str
+
+class MonitoraggioSistema(BaseModel):
+    max_memory_mb: int
+    intervallo_controllo_memoria_secondi: int
 
 class MarketsConfig(BaseModel):
     spot: bool
@@ -107,6 +115,7 @@ class ConfigModel(BaseModel):
     versione_config: str
     impostazioni_generali: ImpostazioniGenerali
     logging: LoggingConfig
+    monitoraggio_sistema: MonitoraggioSistema
     piattaforme: Piattaforme
     parametri_ia: ParametriIA
     gestione_rischio_dinamico: GestioneRischioDinamico
@@ -194,7 +203,6 @@ def setup_logging():
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
         logging.error(f"Errore durante la configurazione del logging: {e}. Uso la configurazione di base.")
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -267,6 +275,43 @@ async def market_data_update_loop():
             logging.error(f"Errore grave nel loop di aggiornamento dati di mercato: {e}", exc_info=True)
             await asyncio.sleep(300)
 
+async def memory_check_loop():
+    """
+    Ciclo in background che controlla l'utilizzo della memoria.
+    Se viene superata una soglia critica, termina il processo con un codice
+    speciale (3) per segnalare allo script supervisore di riavviare.
+    """
+    await asyncio.sleep(20) # Attende un po' dopo l'avvio
+    process = psutil.Process(os.getpid())
+    
+    from .core.gestore_configurazione import carica_configurazione
+    config = carica_configurazione()
+    monitor_config = config.get('monitoraggio_sistema', {})
+    MAX_MEMORY_MB = monitor_config.get('max_memory_mb', 2048)
+    CHECK_INTERVAL = monitor_config.get('intervallo_controllo_memoria_secondi', 600)
+
+    logging.info(f"Avvio del monitoraggio memoria: soglia={MAX_MEMORY_MB}MB, intervallo={CHECK_INTERVAL}s.")
+
+    while True:
+        try:
+            memory_usage_mb = process.memory_info().rss / (1024 * 1024)
+            logging.info(f"Controllo memoria: Utilizzo attuale = {memory_usage_mb:.2f} MB")
+
+            if memory_usage_mb > MAX_MEMORY_MB:
+                logging.critical(
+                    f"SUPERATA SOGLIA DI MEMORIA! Utilizzo: {memory_usage_mb:.2f}MB > "
+                    f"Soglia: {MAX_MEMORY_MB}MB. Invio segnale di terminazione per riavvio."
+                )
+                # Invia un segnale di terminazione standard. Uvicorn lo intercetterà
+                # e avvierà uno shutdown pulito, senza generare un'eccezione visibile.
+                os.kill(os.getpid(), signal.SIGTERM)
+                break # Esce dal loop di controllo memoria
+
+            await asyncio.sleep(CHECK_INTERVAL)
+
+        except Exception as e:
+            logging.error(f"Errore nel loop di controllo memoria: {e}", exc_info=True)
+            await asyncio.sleep(60) # Aspetta un po' prima di riprovare
 
 @app.on_event("startup")
 async def startup_event():
@@ -291,6 +336,10 @@ async def startup_event():
         # Avvia il loop di aggiornamento dei dati di mercato
         asyncio.create_task(market_data_update_loop())
         logging.info("Loop di aggiornamento dati di mercato avviato.")
+
+        # Avvia il loop di monitoraggio della memoria
+        asyncio.create_task(memory_check_loop())
+        logging.info("Loop di monitoraggio memoria avviato.")
 
         from .core.gestore_configurazione import carica_configurazione
         config = carica_configurazione()
@@ -995,12 +1044,14 @@ async def ai_trading_loop():
                         posizione_aperta = gestore_globale_portafoglio.portafoglio.posizioni_aperte.get(asset)
                         prezzo_attuale = get_prezzo_cache(asset, quote_currency)
                         segnale_forzato = None
-
-                        if posizione_aperta and posizione_aperta.take_profit_price and prezzo_attuale:
-                            logging.info(f"AI: Monitorando {coppia}. Prezzo attuale: {prezzo_attuale:.4f}, Take Profit: {posizione_aperta.take_profit_price:.4f}")
-                            if prezzo_attuale >= posizione_aperta.take_profit_price:
-                                logging.info(f"AI: Obiettivo Take Profit raggiunto per {coppia} a {prezzo_attuale:.4f}. Forzo la VENDITA.")
-                                segnale_forzato = "VENDI"
+                        
+                        percentuale_take_profit = config.get('parametri_ia', {}).get('percentuale_take_profit')
+                        if percentuale_take_profit and percentuale_take_profit > 0:
+                            if posizione_aperta and posizione_aperta.take_profit_price and prezzo_attuale:
+                                logging.info(f"AI: Monitorando {coppia}. Prezzo attuale: {prezzo_attuale:.4f}, Take Profit: {posizione_aperta.take_profit_price:.4f}")
+                                if prezzo_attuale >= posizione_aperta.take_profit_price:
+                                    logging.info(f"AI: Obiettivo Take Profit raggiunto per {coppia} a {prezzo_attuale:.4f}. Forzo la VENDITA.")
+                                    segnale_forzato = "VENDI"
                         # --- FINE LOGICA TAKE PROFIT ---
 
                         if segnale_forzato:
@@ -1057,6 +1108,7 @@ async def ai_trading_loop():
                             min_buy_notional = impostazioni_generali['min_buy_notional_usd']
 
                             # Calcola il valore totale del portafoglio (liquidi + asset)
+                            # SPOSTATO QUI PER AVERE IL VALORE AGGIORNATO AD OGNI CICLO
                             valore_liquidi = gestore_globale_portafoglio.portafoglio.budget_usd_corrente
                             valore_asset = 0
                             for asset_name, quantita in gestore_globale_portafoglio.portafoglio.asset.items():
@@ -1112,56 +1164,17 @@ async def ai_trading_loop():
                         elif segnale == "VENDI" and prezzo:
                             quantita_posseduta = gestore_globale_portafoglio.portafoglio.asset.get(asset, 0)
                             if quantita_posseduta > 0:
-                                # --- CONTROLLO E ADEGUAMENTO QUANTITÀ MINIMA E PRECISIONE PER LA VENDITA ---
-                                market_info = piattaforma_ccxt.markets.get(coppia)
-                                min_amount = market_info.get('limits', {}).get('amount',{}).get('min')
-                                amount_precision = market_info.get('limits', {}).get('amount',{}).get('precision')
-                                quantita_da_vendere = quantita_posseduta
-
-                                if amount_precision is not None:
-                                    # Arrotonda la quantità alla precisione corretta
-                                    from ccxt import TRUNCATE # Importa TRUNCATE qui
-                                    quantita_da_vendere = piattaforma_ccxt.decimal_to_precision(quantita_da_vendere, TRUNCATE, amount_precision)
-                                    quantita_da_vendere = float(quantita_da_vendere)
-
-                                if min_amount and quantita_da_vendere < min_amount:
-                                    logging.warning(f"AI: Quantità da vendere ({quantita_da_vendere:.8f}) per {coppia} è inferiore al minimo di {min_amount}. Salto la vendita.")
-                                    continue
-                                # --- FINE CONTROLLO QUANTITÀ MINIMA E PRECISIONE ---
                                 motivo_vendita = 'TAKE_PROFIT' if segnale_forzato else 'SEGNALE_IA'
-                                logging.info(f"AI: Eseguendo vendita ({motivo_vendita}) di {quantita_da_vendere:.6f} {asset}...")
-                                await gestore_globale_portafoglio.esegui_vendita(nome_piattaforma, coppia, quantita_da_vendere, prezzo, motivo=motivo_vendita)
-                                asset_venduti_di_recente.append((coppia, time.time()))
-                                # --- NUOVA LOGICA: Annulla ordini esistenti prima di vendere ---
-                                try:
-                                    ordini_aperti = await piattaforma_ccxt.fetch_open_orders(coppia)
-                                    if ordini_aperti:
-                                        logging.info(f"AI: Trovati {len(ordini_aperti)} ordini aperti per {coppia}. Annullamento in corso prima della vendita...")
-                                        for ordine in ordini_aperti:
-                                            await piattaforma_ccxt.cancel_order(ordine['id'], coppia)
-                                            logging.info(f"AI: Annullato ordine precedente {ordine['id']} per {coppia}.")
-                                            # Registra l'evento nel DB
-                                            dettagli_evento = f"Annullato ordine {ordine['type']} ID: {ordine['id']} per segnale di VENDITA."
-                                            salva_evento_db("ANNULLA_ORDINE", piattaforma=nome_piattaforma, coppia=coppia, dettagli=dettagli_evento)
-                                        # Attendi un istante per dare tempo all'exchange di processare la cancellazione
-                                        await asyncio.sleep(1) 
-                                except Exception as cancel_e:
-                                    logging.error(f"AI: Errore durante l'annullamento degli ordini per {coppia}: {cancel_e}. La vendita potrebbe fallire.")
-                                # --- FINE NUOVA LOGICA ---
-
-                                impostazioni_generali = config['impostazioni_generali']
-                                min_sell_notional = impostazioni_generali.get('min_sell_notional_usd', 0) # Usa .get per sicurezza
-                                valore_vendita = quantita_posseduta * prezzo
-
-                                if valore_vendita < min_sell_notional:
-                                    logging.info(f"AI: Vendita di {asset} saltata. Il valore ({valore_vendita:.2f} USD) è inferiore alla soglia minima di vendita ({min_sell_notional:.2f} USD).")
-                                    continue
-
-                                # ... (logica vendita profittevole)
-                                quantita_da_vendere = quantita_posseduta
-                                logging.info(f"AI: Eseguendo vendita di {quantita_da_vendere:.6f} {asset} (valore: {valore_vendita:.2f} USD)...")
-                                await gestore_globale_portafoglio.esegui_vendita(nome_piattaforma, coppia, quantita_da_vendere, prezzo)
-                                # Aggiungi l'asset alla lista di attesa
+                                logging.info(f"AI: Eseguendo vendita completa ({motivo_vendita}) per {asset}...")
+                                # La quantità effettiva verrà determinata all'interno di esegui_vendita
+                                await gestore_globale_portafoglio.esegui_vendita(
+                                    piattaforma_id=nome_piattaforma, 
+                                    coppia=coppia, 
+                                    quantita_da_vendere=0, # Ignorata quando vendi_tutto=True
+                                    prezzo=prezzo, 
+                                    motivo=motivo_vendita, 
+                                    vendi_tutto=True
+                                )
                                 asset_venduti_di_recente.append((coppia, time.time()))
                         else: # Segnale MANTIENI
                             dettagli_evento = f"Segnale MANTIENI per {coppia}. Prezzo: {prezzo:.4f}"

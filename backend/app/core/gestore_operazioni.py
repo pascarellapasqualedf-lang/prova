@@ -112,10 +112,16 @@ class GestorePortafoglio:
             self.portafoglio.posizioni_aperte[simbolo_base] = PosizioneAperta(coppia=coppia, quantita=quantita_eseguita, prezzo_medio_acquisto=prezzo_medio, commissioni_totali_acquisto=commissioni_usd, take_profit_price=take_profit_price)
         return nuova_operazione
 
-    async def esegui_vendita(self, piattaforma_id: str, coppia: str, quantita_da_vendere: float, prezzo: float, tipo_ordine: str = 'market', motivo: str = 'SEGNALE_IA'):
+    async def esegui_vendita(self, piattaforma_id: str, coppia: str, quantita_da_vendere: float, prezzo: float, tipo_ordine: str = 'market', motivo: str = 'SEGNALE_IA', vendi_tutto: bool = False):
         config = carica_configurazione()
         modalita_reale = config['impostazioni_generali']['modalita_reale_attiva']
         simbolo_base, simbolo_quotazione = coppia.split('/')
+        
+        posizione_da_chiudere = self.portafoglio.posizioni_aperte.get(simbolo_base)
+        if vendi_tutto and posizione_da_chiudere:
+            quantita_da_vendere = posizione_da_chiudere.quantita
+            logging.info(f"Flag 'vendi_tutto' attivo. La quantità da vendere per {coppia} è stata impostata a {quantita_da_vendere:.8f} (intero saldo).")
+
         controvalore = quantita_da_vendere * prezzo
         commissioni_usd = 0.0
         profitto_perdita_operazione = 0.0
@@ -125,7 +131,29 @@ class GestorePortafoglio:
         if modalita_reale:
             try:
                 piattaforma_reale = get_platform_instance(piattaforma_id)
-                order = await piattaforma_reale.create_market_sell_order(coppia, quantita_da_vendere)
+                
+                # --- NUOVA LOGICA DI PULIZIA E CONTROLLO QUANTITÀ ---
+                market = piattaforma_reale.markets.get(coppia)
+                if not market:
+                    raise ValueError(f"Dettagli di mercato non trovati per {coppia}")
+
+                try:
+                    # 1. Pulisci la quantità secondo la precisione dell'exchange
+                    quantita_pulita = float(piattaforma_reale.amount_to_precision(coppia, quantita_da_vendere))
+                    logging.info(f"Quantità originale: {quantita_da_vendere:.8f}, Quantità pulita per l'exchange: {quantita_pulita:.8f}")
+                except ccxt.InvalidOrder as e:
+                    # Questo errore viene sollevato se la quantità è inferiore alla precisione minima (è "dust")
+                    logging.warning(f"Impossibile vendere {coppia} perché la quantità ({quantita_da_vendere:.8f}) è 'dust' (inferiore alla precisione minima richiesta). Vendita annullata. Dettagli: {e}")
+                    return None
+
+                # 2. Controlla se la quantità pulita supera il minimo richiesto
+                min_amount = market.get('limits', {}).get('amount', {}).get('min')
+                if min_amount and quantita_pulita < min_amount:
+                    logging.warning(f"Quantità da vendere ({quantita_pulita:.8f}) per {coppia} è inferiore al minimo di {min_amount}. Vendita annullata.")
+                    return None
+                # --- FINE NUOVA LOGICA ---
+
+                order = await piattaforma_reale.create_market_sell_order(coppia, quantita_pulita) # Usa la quantità pulita
                 quantita_eseguita = order['filled']
                 prezzo_medio = order['average'] if order['average'] is not None else prezzo
                 if 'fees' in order and isinstance(order['fees'], list):
@@ -133,7 +161,6 @@ class GestorePortafoglio:
                         if 'cost' in fee and isinstance(fee['cost'], (int, float)):
                             commissioni_usd += fee['cost']
                 
-                # Calcola il profitto PRIMA di inviare la notifica
                 if simbolo_base in self.portafoglio.posizioni_aperte:
                     pos = self.portafoglio.posizioni_aperte[simbolo_base]
                     costo_acquisto = pos.prezzo_medio_acquisto * quantita_eseguita
@@ -141,46 +168,57 @@ class GestorePortafoglio:
                     profitto_perdita_operazione = ricavo_vendita - costo_acquisto
                     logging.info(f"Calcolo P/L per {coppia}: Ricavo={ricavo_vendita:.2f}, Costo={costo_acquisto:.2f}, P/L={profitto_perdita_operazione:.2f}")
                 else:
-                    profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd # Non si può calcolare il P/L reale senza posizione
+                    profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd
 
                 logging.info(f"VENDITA REALE completata: {quantita_eseguita} {coppia} a {prezzo_medio}. Commissioni: {commissioni_usd}")
                 crea_notifica(
                     titolo=f"Vendita Eseguita: {coppia}",
                     messaggio=f"Venduti {quantita_eseguita:.6f} di {simbolo_base} a {prezzo_medio:.2f}. P/L: {profitto_perdita_operazione:.2f} USD"
                 )
+            except ccxt.InvalidOrder as e:
+                logging.error(f"Errore InvalidOrder durante la vendita reale per {coppia}: {e}", exc_info=True)
+                return None # Annulla l'operazione se l'ordine è invalido
             except Exception as e:
-                logging.error(f"Errore durante l'esecuzione della vendita reale per {coppia}: {e}", exc_info=True)
-                # Non rilanciare l'eccezione per non bloccare l'aggiornamento dello stato sottostante
-                # ma assicurati che la quantità eseguita sia zero se l'ordine fallisce.
+                logging.error(f"Errore generico durante l'esecuzione della vendita reale per {coppia}: {e}", exc_info=True)
                 quantita_eseguita = 0
-                prezzo_medio = prezzo # Fallback al prezzo di mercato stimato
+                prezzo_medio = prezzo
                 profitto_perdita_operazione = 0
 
-        else:
+        else: # Modalità simulata
             quantita_eseguita = quantita_da_vendere
             prezzo_medio = prezzo
 
-        if simbolo_base in self.portafoglio.posizioni_aperte:
-            pos = self.portafoglio.posizioni_aperte[simbolo_base]
-            costo_acquisto_proporzionale = (quantita_eseguita / pos.quantita) * (pos.quantita * pos.prezzo_medio_acquisto + pos.commissioni_totali_acquisto)
+        if quantita_eseguita == 0 and modalita_reale:
+             logging.warning(f"La vendita per {coppia} non è stata eseguita o è fallita. Nessun aggiornamento del portafoglio.")
+             return None
+
+        if posizione_da_chiudere:
+            costo_acquisto_proporzionale = (quantita_eseguita / posizione_da_chiudere.quantita) * (posizione_da_chiudere.quantita * posizione_da_chiudere.prezzo_medio_acquisto + posizione_da_chiudere.commissioni_totali_acquisto) if posizione_da_chiudere.quantita > 0 else 0
             profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd - costo_acquisto_proporzionale
             
-            # Calcola la percentuale di profitto/perdita
             if costo_acquisto_proporzionale > 0:
                 percentuale_profitto_perdita = (profitto_perdita_operazione / costo_acquisto_proporzionale) * 100
             else:
                 percentuale_profitto_perdita = 0.0
 
-            pos.quantita -= quantita_eseguita
-            if pos.quantita <= 1e-9:
+            if vendi_tutto:
+                logging.info(f"Chiusura forzata della posizione per {simbolo_base} a seguito di 'vendi_tutto'.")
                 del self.portafoglio.posizioni_aperte[simbolo_base]
+            else:
+                posizione_da_chiudere.quantita -= quantita_eseguita
+                if posizione_da_chiudere.quantita <= 1e-9:
+                    del self.portafoglio.posizioni_aperte[simbolo_base]
         else:
             profitto_perdita_operazione = (quantita_eseguita * prezzo_medio) - commissioni_usd
-            percentuale_profitto_perdita = 0.0 # Non possiamo calcolare la percentuale senza un costo di acquisto
+            percentuale_profitto_perdita = 0.0
 
         self.portafoglio.profitto_perdita_totale_usd += profitto_perdita_operazione
         self.portafoglio.budget_usd_corrente += (quantita_eseguita * prezzo_medio) - commissioni_usd
-        self.portafoglio.asset[simbolo_base] -= quantita_eseguita
+        
+        if vendi_tutto:
+            self.portafoglio.asset[simbolo_base] = 0
+        else:
+            self.portafoglio.asset[simbolo_base] -= quantita_eseguita
 
         tipo_operazione = f'vendita_{"reale" if modalita_reale else "simulata"}_{tipo_ordine}'
         nuova_operazione = Operazione(id_operazione=str(uuid.uuid4()), piattaforma=piattaforma_id, coppia=coppia, tipo=tipo_operazione, quantita=quantita_eseguita, prezzo=prezzo_medio, controvalore_usd=(quantita_eseguita * prezzo_medio), commissioni_usd=commissioni_usd, profitto_perdita_operazione=profitto_perdita_operazione, percentuale_profitto_perdita=percentuale_profitto_perdita)
