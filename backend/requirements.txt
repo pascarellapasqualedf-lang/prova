@@ -1,4 +1,7 @@
 fastapi
-uvicorn[standard]
+uvicorn
 ccxt
-pandas
+pydantic
+aiohttp
+python-dotenv
+psutil
